@@ -1,7 +1,7 @@
 package game;
 
 import enums.GroundUnitType;
-import guis.IslandChooser;
+import guis.IslandManagerGUI;
 import units.Army;
 import units.GroundUnit;
 
@@ -24,6 +24,7 @@ public class Main {
 
         //LoginScreen loginScreen = new LoginScreen(game);
         //loginScreen.setVisible(true);
-        IslandChooser islandChooser = new IslandChooser(null);
+        //IslandChooser islandChooser = new IslandChooser(null);
+        IslandManagerGUI gui = new IslandManagerGUI(game,game.getIslands().get(0).getCities());
     }
 }
