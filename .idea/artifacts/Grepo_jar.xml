@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Grepo:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Grepo_jar</output-path>
+    <root id="archive" name="Grepo.jar">
+      <element id="module-output" name="Grepo" />
+    </root>
+  </artifact>
+</component>
