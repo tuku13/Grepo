@@ -4,7 +4,7 @@ import com.sun.istack.internal.NotNull;
 import enums.BuildingType;
 import exceptions.BuildingReachedMaxLevel;
 import game.City;
-import game.Tickable;
+import tasks.Tickable;
 
 import java.io.Serializable;
 
@@ -61,4 +61,6 @@ public class Building implements Serializable, Tickable {
     public City getCity() {
         return city;
     }
+
+
 }

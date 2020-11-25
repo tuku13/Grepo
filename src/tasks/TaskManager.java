@@ -6,13 +6,12 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-public class TaskManager {
+public class TaskManager implements Serializable{
     private static TaskManager taskManager;
     private List<Task> tasks;
 
     private TaskManager(){
         this.tasks = new ArrayList<>();
-        load();
     }
 
     public static TaskManager getInstance(){
@@ -22,7 +21,7 @@ public class TaskManager {
         return taskManager;
     }
 
-    public final void load(){
+    /*public final void load(){
         try{
             FileInputStream f = new FileInputStream("data" + File.separator +"tasks");
             ObjectInputStream in = new ObjectInputStream(f);
@@ -42,7 +41,7 @@ public class TaskManager {
         } catch (Exception exc){
             exc.printStackTrace();
         }
-    }
+    }*/
 
     public void add(Task t){
         this.tasks.add(t);
@@ -57,7 +56,6 @@ public class TaskManager {
             t.tick();
         }
         removeExecutedTasks();
-        save();
     }
 
     public void remove(Task t){

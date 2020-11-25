@@ -9,6 +9,7 @@ import javax.swing.text.Style;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class LoginScreen extends JFrame {
 
@@ -95,6 +96,13 @@ public class LoginScreen extends JFrame {
                 System.out.println("Sikeres belépés");
                 dispose();
                 //TODO új screen indítása
+                IslandChooser islandChooser = null;
+                try {
+                    islandChooser = new IslandChooser(game);
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+                islandChooser.setVisible(true);
             }
             else{
                 JOptionPane.showMessageDialog(null,"Hibás név vagy jelszó!","Hiba",JOptionPane.ERROR_MESSAGE);

@@ -2,6 +2,7 @@ package game;
 
 import buildings.Building;
 import enums.BuildingType;
+import tasks.Tickable;
 import units.Army;
 
 import java.io.Serializable;
@@ -14,12 +15,14 @@ public final class City implements Tickable, Serializable {
     private Island island;
     private List<Building> buildings;
     private Army army;
+    private String name;
     long defeatTime;
 
-    public City(Island island){
+    public City(Island island,String name){
         resources = new ResourceStack(100,100,100,0);
         this.island = island;
-
+        this.name = name;
+        //todo talán nincs értelme:  this.name = (name == null) ? (player.name + " városa") : name;
         buildings = new ArrayList<>();
         buildings.add(new Building(BuildingType.SENATE,1,this));
         buildings.add(new Building(BuildingType.QUARRY,1,this));
@@ -83,5 +86,15 @@ public final class City implements Tickable, Serializable {
 
     public Army getArmy() {
         return army;
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
+    //TODO nem kell csak tesztéshez
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 }

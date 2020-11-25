@@ -1,5 +1,7 @@
 package game;
 
+import tasks.Tickable;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;

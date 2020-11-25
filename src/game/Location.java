@@ -14,7 +14,6 @@ public class Location implements Serializable {
         return Math.sqrt( Math.pow(l.getX() - this.getX(),2) + Math.pow(l.getY() - this.getY(),2) );
     }
 
-
     public double getX() {
         return x;
     }
