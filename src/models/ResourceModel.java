@@ -31,7 +31,7 @@ public class ResourceModel extends AbstractTableModel {
             return rowIndex + 1;
         }
         else{
-            return resourcePerHour.get(rowIndex);
+            return String.format("%.2f db/h",resourcePerHour.get(rowIndex));
         }
     }
 

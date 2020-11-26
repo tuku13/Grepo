@@ -22,6 +22,7 @@ public class Island implements Tickable, Serializable {
     @Override
     public void tick() {
         for(City c : cities.values()){
+            if(c == null) continue;
             c.tick();
         }
     }

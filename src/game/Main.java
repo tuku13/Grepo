@@ -1,20 +1,13 @@
 package game;
 
-import buildings.Building;
-import enums.BuildingType;
 import enums.GroundUnitType;
-import guis.IslandChooser;
-import guis.IslandManagerGUI;
 import guis.LoginScreen;
-import guis.ResourceProducerGUI;
 import units.Army;
 import units.GroundUnit;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.util.HashMap;
 
 public class Main {
     public static void main(String[] args){
@@ -37,7 +30,7 @@ public class Main {
         /*Island island = new Island("Szigetke",1,1.0,0.9,new HashMap<>());
         City city = new City(island,"városke");
         island.getCities().put(new Location(100,100),city);
-        ResourceProducerGUI gui = new ResourceProducerGUI(city,city.getBuilding(BuildingType.TIMBER_CAMP));
+        ResourceInfoFrame gui = new ResourceInfoFrame(city,city.getBuilding(BuildingType.TIMBER_CAMP));
         gui.setVisible(true);*/
 
         LoginScreen loginScreen = new LoginScreen(game);

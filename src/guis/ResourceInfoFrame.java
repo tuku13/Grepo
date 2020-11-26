@@ -7,16 +7,17 @@ import game.City;
 import javax.swing.*;
 import java.awt.*;
 
-public class ResourceProducerGUI extends JFrame {
+public class ResourceInfoFrame extends JFrame {
     private City city;
     private Building building;
     private ResourceModel data;
 
-    public ResourceProducerGUI(City c, Building b){
+    public ResourceInfoFrame(City c, Building b){
         super(b.getBuildingType().getName() + " lvl " + b.getLevel());
         this.building = b;
         this.city = c;
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        this.setLocationRelativeTo(null);
         setMinimumSize(new Dimension(300,200));
 
         //táblázat feltöltése szint | hozam párokkal
