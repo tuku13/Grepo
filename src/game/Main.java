@@ -31,20 +31,19 @@ public class Main {
 
         System.out.println("életben maradó katonák: " + győztes.getGroundArmy());
 
-        //Game game = loadGame();
+        Game game = loadGame();
         //Game game = new Game();
 
-        Island island = new Island("Szigetke",1,1.0,0.9,new HashMap<>());
+        /*Island island = new Island("Szigetke",1,1.0,0.9,new HashMap<>());
         City city = new City(island,"városke");
         island.getCities().put(new Location(100,100),city);
         ResourceProducerGUI gui = new ResourceProducerGUI(city,city.getBuilding(BuildingType.TIMBER_CAMP));
-        gui.setVisible(true);
+        gui.setVisible(true);*/
 
-        //LoginScreen loginScreen = new LoginScreen(game);
-        //loginScreen.setVisible(true);
+        LoginScreen loginScreen = new LoginScreen(game);
+        loginScreen.setVisible(true);
 
         //IslandManagerGUI gui = new IslandManagerGUI(game,game.getIslands().get(0).getCities());
-
     }
 
     private static Game loadGame(){

@@ -96,13 +96,22 @@ public class LoginScreen extends JFrame {
                 System.out.println("Sikeres belépés");
                 dispose();
                 //TODO új screen indítása
-                IslandChooser islandChooser = null;
+                /*IslandChooser islandChooser = null;
                 try {
                     islandChooser = new IslandChooser(game);
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 }
-                islandChooser.setVisible(true);
+                islandChooser.setVisible(true);*/
+
+                CityGUI gui = null;
+                try {
+                    gui = new CityGUI(game);
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+                gui.setVisible(true);
+
             }
             else{
                 JOptionPane.showMessageDialog(null,"Hibás név vagy jelszó!","Hiba",JOptionPane.ERROR_MESSAGE);

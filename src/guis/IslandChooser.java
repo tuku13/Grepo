@@ -1,6 +1,10 @@
 package guis;
 
+import enums.BuildingType;
+import game.City;
 import game.Game;
+import game.Island;
+import game.Location;
 import models.IslandModel;
 
 import javax.imageio.ImageIO;
@@ -10,6 +14,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 
 public class IslandChooser extends JFrame {
     private Game game;
@@ -41,26 +46,12 @@ public class IslandChooser extends JFrame {
 
     }
 
-    private class ImagePanel extends JPanel{
-        private Image img;
-
-        public ImagePanel(Image img){
-            this.img = img;
-        }
-
-        @Override
-        protected void paintComponent(Graphics g) {
-            super.paintComponent(g);
-            g.drawImage(img, 0, 0, null);
-        }
-
-    }
-
     private class ClickIslandEvent implements MouseListener{
 
         @Override
         public void mouseClicked(MouseEvent e) {
-            //System.out.println(e.getPoint());
+            System.out.println(e.getPoint());
+
             if((new Point(190,566)).distance(e.getPoint()) <= 250){
                 System.out.println("bal oldali");
                 panel.setVisible(false);

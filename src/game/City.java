@@ -22,7 +22,7 @@ public final class City implements Tickable, Serializable {
         resources = new ResourceStack(100,100,100,0);
         this.island = island;
         this.name = name;
-        //todo talán nincs értelme:  this.name = (name == null) ? (player.name + " városa") : name;
+        //todo talán nincs értelme: this.name = (name == null) ? (player.name + " városa") : name;
         buildings = new ArrayList<>();
         buildings.add(new Building(BuildingType.SENATE,1,this));
         buildings.add(new Building(BuildingType.QUARRY,1,this));

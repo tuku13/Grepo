@@ -135,4 +135,5 @@ public class Game implements Tickable, Serializable{
     public Player getAuthenticatedPlayer() {
         return authenticatedPlayer;
     }
+
 }

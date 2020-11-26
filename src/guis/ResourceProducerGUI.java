@@ -16,7 +16,7 @@ public class ResourceProducerGUI extends JFrame {
         super(b.getBuildingType().getName() + " lvl " + b.getLevel());
         this.building = b;
         this.city = c;
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new Dimension(300,200));
 
         //táblázat feltöltése szint | hozam párokkal
