@@ -8,12 +8,13 @@ import java.awt.*;
 
 
 public class ResourcePanel extends JPanel implements Tickable {
-    ResourceStack resourceStack;
-    JLabel woodLabel,stoneLabel,silverLabel,favourLabel;
+    private ResourceStack resourceStack;
+    private JLabel woodLabel,stoneLabel,silverLabel,favourLabel;
+    private FlowLayout flowLayout;
 
     public ResourcePanel(ResourceStack resourceStack){
         this.resourceStack = resourceStack;
-        FlowLayout flowLayout = new FlowLayout();
+        flowLayout = new FlowLayout();
         flowLayout.setHgap(120);
         flowLayout.setAlignment(FlowLayout.RIGHT);
         this.setLayout(flowLayout);
@@ -29,21 +30,35 @@ public class ResourcePanel extends JPanel implements Tickable {
         stoneLabel = new JLabel();
         stoneLabel.setText(String.format("%.2f",resourceStack.getStone()));
         stoneLabel.setForeground(new Color(255,255,255));
+        stoneLabel.setFont(new Font("Dialog",Font.BOLD,14));
         stoneLabel.setIcon(new ImageIcon("images/stone_icon.png"));
         this.add(stoneLabel);
 
         silverLabel = new JLabel();
         silverLabel.setText(String.format("%.2f",resourceStack.getSilver()));
         silverLabel.setForeground(new Color(255,255,255));
+        silverLabel.setFont(new Font("Dialog",Font.BOLD,14));
         silverLabel.setIcon(new ImageIcon("images/silver_icon.png"));
         this.add(silverLabel);
 
         favourLabel = new JLabel();
         favourLabel.setText(String.format("%.2f",resourceStack.getFavour()));
         favourLabel.setForeground(new Color(255,255,255));
+        favourLabel.setFont(new Font("Dialog",Font.BOLD,14));
         favourLabel.setIcon(new ImageIcon("images/favour_icon.png"));
         this.add(favourLabel);
 
+    }
+
+    public void setHorizontalGap(int i){
+        flowLayout.setHgap(i);
+    }
+
+    public void setFontColor(Color c){
+        woodLabel.setForeground(c);
+        stoneLabel.setForeground(c);
+        silverLabel.setForeground(c);
+        favourLabel.setForeground(c);
     }
 
     @Override

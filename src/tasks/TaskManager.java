@@ -1,5 +1,7 @@
 package tasks;
 
+import game.Main;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,6 +14,9 @@ public class TaskManager implements Serializable{
 
     private TaskManager(){
         this.tasks = new ArrayList<>();
+        if(!Main.DEBUG){
+            load();
+        }
     }
 
     public static TaskManager getInstance(){
@@ -21,9 +26,9 @@ public class TaskManager implements Serializable{
         return taskManager;
     }
 
-    /*public final void load(){
+    public final void load(){
         try{
-            FileInputStream f = new FileInputStream("data" + File.separator +"tasks");
+            FileInputStream f = new FileInputStream("data" + File.separator +"tasks.ser");
             ObjectInputStream in = new ObjectInputStream(f);
             tasks = (List<Task>) in.readObject();
             in.close();
@@ -33,7 +38,7 @@ public class TaskManager implements Serializable{
     }
     private final void save(){
         try{
-            FileOutputStream f = new FileOutputStream("data" + File.separator +"tasks");
+            FileOutputStream f = new FileOutputStream("data" + File.separator +"tasks.ser");
             ObjectOutputStream out = new ObjectOutputStream(f);
             out.writeObject(tasks);
             out.close();
@@ -41,7 +46,11 @@ public class TaskManager implements Serializable{
         } catch (Exception exc){
             exc.printStackTrace();
         }
-    }*/
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
 
     public void add(Task t){
         this.tasks.add(t);
@@ -53,9 +62,15 @@ public class TaskManager implements Serializable{
 
     public void tick(){
         for(Task t : tasks){
-            t.tick();
+            try{
+                t.tick();
+            }
+            catch (NullPointerException exc){
+                t.setExecuted(true);
+            }
         }
         removeExecutedTasks();
+        save();
     }
 
     public void remove(Task t){
@@ -69,5 +84,9 @@ public class TaskManager implements Serializable{
                 it.remove();
             }
         }
+    }
+
+    protected Object readObject(){
+        return taskManager;
     }
 }

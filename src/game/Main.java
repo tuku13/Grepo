@@ -2,6 +2,7 @@ package game;
 
 import enums.GroundUnitType;
 import guis.LoginScreen;
+import tasks.TravellingTask;
 import units.Army;
 import units.GroundUnit;
 
@@ -10,6 +11,7 @@ import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 
 public class Main {
+    public static final boolean DEBUG = true;
     public static void main(String[] args){
 
         Army x = new Army();
@@ -24,8 +26,13 @@ public class Main {
 
         System.out.println("életben maradó katonák: " + győztes.getGroundArmy());
 
-        Game game = loadGame();
-        //Game game = new Game();
+        Game game;
+        if(DEBUG){
+            game = new Game();
+        }
+        else{
+            game = loadGame();
+        }
 
         /*Island island = new Island("Szigetke",1,1.0,0.9,new HashMap<>());
         City city = new City(island,"városke");
@@ -45,6 +52,7 @@ public class Main {
             ObjectInputStream in = new ObjectInputStream(f);
             Game game = (Game) in.readObject();
             in.close();
+            //todo nem kell talán: game.taskManager.add(new TravellingTask(60L,null,new Army()));
             return game;
         } catch (Exception exc){
             exc.printStackTrace();

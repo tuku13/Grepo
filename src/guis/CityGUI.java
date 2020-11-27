@@ -28,7 +28,6 @@ public class CityGUI extends JFrame {
         this.setSize(1024,768);
         this.setResizable(false);
 
-
         timer = new Timer(1000,new TickListener());
         timer.setRepeats(true);
         timer.start();
@@ -123,7 +122,6 @@ public class CityGUI extends JFrame {
                 }
                 openedFrame = new SenateFrame(city);
                 openedFrame.setVisible(true);
-                System.out.println("Szenátus");
             }
 
             //kikoto 608, 458 < 45
@@ -135,11 +133,12 @@ public class CityGUI extends JFrame {
             }
 
             //kaszarnya 466, 340 < 30
-            if((new Point(466, 340 )).distance(e.getPoint()) <= 30){
+            if((new Point(560,343)).distance(e.getPoint()) <= 30){
                 if(openedFrame != null){
                     openedFrame.dispose();
                 }
-                System.out.println("Kaszarnya");
+                openedFrame = new BarracksFrame(city);
+                openedFrame.setVisible(true);
             }
 
 

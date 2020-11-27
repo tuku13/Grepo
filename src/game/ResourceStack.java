@@ -45,6 +45,13 @@ public class ResourceStack implements Serializable {
         return true;
     }
 
+    public void multiply(double d){
+        this.wood *= d;
+        this.stone *= d;
+        this.silver *= d;
+        this.favour *= d;
+    }
+
     public void subtract(double wood,double stone,double silver)throws NotEnoughResource{
         if(!hasEnough(new ResourceStack(wood,stone,silver,0))){
             throw new NotEnoughResource();

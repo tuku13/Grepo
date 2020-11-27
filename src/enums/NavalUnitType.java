@@ -2,12 +2,12 @@ package enums;
 
 public enum NavalUnitType {
     TRANSPORT_BOAT(0,1,26,8),
-    BIREME(24,160,0,15),
+    FAST_TRANSPORT_SHIP(1,0,10,15);
+    /*BIREME(24,160,0,15),
     LIGHT_SHIP(200,60,0,13),
     FIRE_SHIP(20,1,0,5),
-    FAST_TRANSPORT_SHIP(1,0,10,15),
     TRIREME(250,250,0,15),
-    COLONY_SHIP(0,1,0,3);
+    COLONY_SHIP(0,1,0,3);*/
 
     private final int attack,maxDefence,capacity,maxSpeed;
 

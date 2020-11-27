@@ -45,11 +45,6 @@ public final class City implements Tickable, Serializable {
         return null;
     }
 
-    public void upgrade(BuildingType buildingType){
-        Building b = getBuilding(buildingType);
-
-    }
-
     public void conquer(Player p){
         //TODO talán kivétel, mert nem legyőzött várost nem lehet elfoglalni
         if(defeatTime > 0){
@@ -86,6 +81,10 @@ public final class City implements Tickable, Serializable {
 
     public Army getArmy() {
         return army;
+    }
+
+    public List<Building> getBuildings() {
+        return buildings;
     }
 
     @Override

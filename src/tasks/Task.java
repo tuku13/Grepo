@@ -19,6 +19,7 @@ public abstract class Task implements Serializable {
     protected abstract void execute();
 
     public final void tick() {
+        System.out.println(this + ": " + this.time);
         if(active && !executed){
             --time;
             if(time <= 0){
@@ -44,6 +45,8 @@ public abstract class Task implements Serializable {
     public void setTime(long time) {
         this.time = time;
     }
+
+    public void setExecuted(boolean executed) { this.executed = executed; }
 
     public boolean isExecuted() {
         return executed;

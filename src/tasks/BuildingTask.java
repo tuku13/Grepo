@@ -1,19 +1,31 @@
 package tasks;
 
+import buildings.Building;
 import enums.BuildingType;
+import exceptions.BuildingReachedMaxLevel;
 import game.City;
 
 public class BuildingTask extends Task {
 
-    private BuildingType buildingType;
+    private Building building;
 
-    public BuildingTask(Long l,City city,BuildingType buildingType) {
+    public BuildingTask(Long l,City city, Building building) {
         super(l,city);
-        this.buildingType = buildingType;
+        this.building = building;
+    }
+
+    @Override
+    public String toString() {
+        String str = (Math.round(time / 3600)) + ":" +  (time / 60) + ":" + (time % 60);
+        return building.getBuildingType().getName() + " lvl " + (building.getLevel()+1) + "-re, hátralévő idő: " + str;
     }
 
     @Override
     public void execute() {
-        city.upgrade(buildingType);
+        try {
+            building.upgrade();
+        } catch (BuildingReachedMaxLevel buildingReachedMaxLevel) {
+            buildingReachedMaxLevel.printStackTrace();
+        }
     }
 }

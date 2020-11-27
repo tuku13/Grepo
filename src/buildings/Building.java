@@ -20,12 +20,13 @@ public class Building implements Serializable, Tickable {
     }
 
     public final void upgrade() throws BuildingReachedMaxLevel{
-        if(level >= buildingType.getMaxLevel()){
+       /* if(level >= buildingType.getMaxLevel()){
             throw new BuildingReachedMaxLevel();
         }
         else{
             ++level;
-        }
+        }*/
+        ++level;
     }
 
     @Override

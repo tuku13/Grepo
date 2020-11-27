@@ -14,14 +14,17 @@ public class Game implements Tickable, Serializable{
     private List<Player> players;
     private List<Island> islands;
     private transient Player authenticatedPlayer;
-    public TaskManager taskManager;
+    public transient TaskManager taskManager;
 
     public Game(){
         players = new ArrayList<>();
         islands = new ArrayList<>();
         taskManager = TaskManager.getInstance();
 
-        //tesztAdatokFeltöltése();//todo törlése ha nem kell
+        if(Main.DEBUG){
+            tesztAdatokFeltöltése();//todo törlése ha nem kell
+        }
+
         save();
     }
 
@@ -30,7 +33,7 @@ public class Game implements Tickable, Serializable{
         players.add(p);
         HashMap<Location,City> woodCities = new HashMap<>();
         Island woodIsland = new Island("Wood Island",1.0,0.9,1.1,woodCities);
-        City c = new City(woodIsland,"Admin város");
+        City c = new City(woodIsland,"Admin városa");
         c.setPlayer(p);
         woodCities.put(new Location(-180,140),c);
         woodCities.put(new Location(-160,75),null);
@@ -63,7 +66,7 @@ public class Game implements Tickable, Serializable{
         for (Island i : islands){
             i.tick();
         }
-        taskManager.tick();
+        TaskManager.getInstance().tick();
         save();
     }
 
@@ -93,6 +96,7 @@ public class Game implements Tickable, Serializable{
             FileOutputStream f = new FileOutputStream("data" + File.separator +"game.ser");
             ObjectOutputStream out = new ObjectOutputStream(f);
             out.writeObject(this);
+            out.close();
         } catch (Exception exc){
             exc.printStackTrace();
         }
