@@ -19,7 +19,7 @@ public final class City implements Tickable, Serializable {
     long defeatTime;
 
     public City(Island island,String name){
-        resources = new ResourceStack(100,100,100,0);
+        resources = new ResourceStack(1000,1000,1000,0); //TODO értelmesebb kezdő érték
         this.island = island;
         this.name = name;
         //todo talán nincs értelme: this.name = (name == null) ? (player.name + " városa") : name;

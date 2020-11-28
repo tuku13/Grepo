@@ -40,7 +40,7 @@ public class SenateFrame extends JFrame {
             panel.add(resourcePanel);
 
             //todo talán alap font kellene
-            long buildingTime = b.getBuildingType().getBuildingTime(b.getLevel()+1);
+            long buildingTime = Math.round(b.getBuildingType().getBuildingTime(b.getLevel()+1) * (( 101 - city.getBuilding(BuildingType.SENATE).getLevel()) / 100 ));
             String str = (Math.round(buildingTime / 3600)) + ":" +  (buildingTime / 60) + ":" + (buildingTime % 60);
             JLabel timeLabel = new JLabel(str);
             timeLabel.setIcon(new ImageIcon("images/time_icon.png"));

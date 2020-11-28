@@ -22,7 +22,7 @@ public class BarracksFrame extends JFrame {
         this.city = city;
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setTitle(BuildingType.BARRACKS.getName() + " lvl " + city.getBuilding(BuildingType.BARRACKS).getLevel());
-        this.setResizable(false);
+        this.setResizable(true);
         this.setLayout(new GridLayout(GroundUnitType.values().length, 1 , 75,0)); //todo hgap 50 volt
 
         for(GroundUnitType gu : GroundUnitType.values()){
@@ -30,7 +30,7 @@ public class BarracksFrame extends JFrame {
             panel.setBackground(new Color(254,225,157));
             panel.setLayout(new FlowLayout());
             JLabel nameLabel = new JLabel(gu.getName());
-            //nameLabel.setIcon(new ImageIcon("");//TODO ikon
+            nameLabel.setIcon(new ImageIcon(gu.getImageName()));
             panel.add(nameLabel);
 
             ResourceStack cost = gu.getCost();
@@ -40,8 +40,7 @@ public class BarracksFrame extends JFrame {
             resourcePanel.setFontColor(new Color(0,0,0));
             panel.add(resourcePanel);
 
-            //todo talán alap font kellene
-            long trainingTime = gu.getTrainingTime();
+            long trainingTime = Math.round(gu.getTrainingTime() * ( ( 101 - city.getBuilding(BuildingType.BARRACKS).getLevel()) / 100 ));
             String str = (Math.round(trainingTime / 3600)) + ":" +  (trainingTime / 60) + ":" + (trainingTime % 60);
             JLabel timeLabel = new JLabel(str);
             timeLabel.setIcon(new ImageIcon("images/time_icon.png"));
@@ -52,16 +51,21 @@ public class BarracksFrame extends JFrame {
             trainButton.addActionListener(new TrainUnitListener(city,gu));
             panel.add(trainButton);
 
-            if(!city.getResources().hasEnough(cost)){
+            if(!city.getResources().hasEnough(cost) || city.getBuilding(BuildingType.BARRACKS).getLevel() < gu.getRequiredLevel()){
                 trainButton.setEnabled(false);
             }
 
-            trainButton.setText("Képzés");
+            if(city.getBuilding(BuildingType.BARRACKS).getLevel() >= gu.getRequiredLevel()){
+                trainButton.setText("Képzés");
+            }
+            else{
+                trainButton.setText("Szükséges kaszárnya szint: lvl " + gu.getRequiredLevel());
+            }
 
             this.add(panel);
         }
 
-        this.setMinimumSize(new Dimension(700,600));
+        this.setMinimumSize(new Dimension(800,600));
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 

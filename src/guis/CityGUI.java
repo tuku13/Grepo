@@ -129,7 +129,8 @@ public class CityGUI extends JFrame {
                 if(openedFrame != null){
                     openedFrame.dispose();
                 }
-                System.out.println("Kikötő");
+                openedFrame = new HarborFrame(city);
+                openedFrame.setVisible(true);
             }
 
             //kaszarnya 466, 340 < 30
