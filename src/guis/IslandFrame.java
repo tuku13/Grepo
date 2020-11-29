@@ -16,14 +16,17 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
-public class IslandChooser extends JFrame {
+public class IslandFrame extends JFrame {
     private Game game;
     private JPanel panel;
+    private City city;
+    private JFrame openedFrame;
 
-    public IslandChooser(Game game) throws HeadlessException, IOException {
+    public IslandFrame(Game game,City city) throws HeadlessException, IOException {
         this.game = game;
-        this.setTitle("Grepo - Válasz szigetet!");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.city = city;
+        this.setTitle("Grepo - Sziget nézet");
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setSize(1024,768);
         this.setResizable(false);
 
@@ -31,18 +34,12 @@ public class IslandChooser extends JFrame {
         panel.setSize(1024,768);
         panel.addMouseListener(new ClickIslandEvent());
 
-        JPanel header = new ImagePanel(ImageIO.read(new File("images/header.png")));
         //JLabel headerLabel = new JLabel("Sziget nézet");
         //headerLabel.setForeground(new Color(255,255,255));
         //headerLabel.setFont(new Font("Dialog",Font.BOLD,16));
         //header.add(headerLabel);
 
-        JComboBox comboBox = new JComboBox(new IslandModel(game.getIslands(),game.getAuthenticatedPlayer()));
-        header.add(comboBox);
-
         this.add(panel,BorderLayout.CENTER);
-        this.add(header,BorderLayout.NORTH);
-        //this.pack();
 
     }
 
@@ -54,15 +51,29 @@ public class IslandChooser extends JFrame {
 
             if((new Point(190,566)).distance(e.getPoint()) <= 250){
                 System.out.println("bal oldali");
-                panel.setVisible(false);
+                if(openedFrame != null){
+                    openedFrame.dispose();
+                }
+                openedFrame = new IslandListFrame(game,game.getIslands().get(0),city);
+                openedFrame.setVisible(true);
             }
 
             if((new Point(470,140)).distance(e.getPoint()) <= 200){
                 System.out.println("középső");
+                if(openedFrame != null){
+                    openedFrame.dispose();
+                }
+                openedFrame = new IslandListFrame(game,game.getIslands().get(1),city);
+                openedFrame.setVisible(true);
             }
 
             if((new Point(911,454)).distance(e.getPoint()) <= 300){
                 System.out.println("jobb oldali");
+                if(openedFrame != null){
+                    openedFrame.dispose();
+                }
+                openedFrame = new IslandListFrame(game,game.getIslands().get(2),city);
+                openedFrame.setVisible(true);
             }
 
         }

@@ -39,7 +39,13 @@ public class CityGUI extends JFrame {
         JPanel header = new ImagePanel(ImageIO.read(new File("images/header.png")));
         FlowLayout flowLayout = new FlowLayout(FlowLayout.RIGHT);
         header.setLayout(flowLayout);
-        header.add(new JLabel());
+        JButton notificationButton = new JButton("Folyamatok");
+        notificationButton.addActionListener(new ClickNotificationButtonListener());
+        header.add(notificationButton);
+
+        JButton islandsButton = new JButton("Sziget nézet");
+        islandsButton.addActionListener(new ClickIslandButtonListener());
+        header.add(islandsButton);
 
         this.comboBox = new JComboBox(new IslandModel(game.getIslands(),game.getAuthenticatedPlayer()));
         this.city = (City) comboBox.getSelectedItem();
@@ -62,14 +68,43 @@ public class CityGUI extends JFrame {
         }
     }
 
+    private class ClickNotificationButtonListener implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(openedFrame != null){
+                openedFrame.dispose();
+            }
+            openedFrame = new NotificationFrame(city);
+            openedFrame.setVisible(true);
+        }
+    }
+
     private class ChangeCityListener implements ItemListener {
 
         @Override
         public void itemStateChanged(ItemEvent e) {
             city = (City) comboBox.getSelectedItem();
+            resourcePanel.setResourceStack(city.getResources());
             if(openedFrame != null){
                 openedFrame.dispose();
             }
+        }
+    }
+
+    private class ClickIslandButtonListener implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(openedFrame != null){
+                openedFrame.dispose();
+            }
+            try {
+                openedFrame = new IslandFrame(game,city);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+            openedFrame.setVisible(true);
         }
     }
 
@@ -133,7 +168,7 @@ public class CityGUI extends JFrame {
                 openedFrame.setVisible(true);
             }
 
-            //kaszarnya 466, 340 < 30
+            //kaszarnya 560, 343 < 30
             if((new Point(560,343)).distance(e.getPoint()) <= 30){
                 if(openedFrame != null){
                     openedFrame.dispose();
@@ -141,16 +176,6 @@ public class CityGUI extends JFrame {
                 openedFrame = new BarracksFrame(city);
                 openedFrame.setVisible(true);
             }
-
-
-            //todo
-            //templom 456, 303 < 30
-            //ezüst 508, 256 < 30
-            //kikoto 608, 458 < 45
-            //favago 765, 480  < 30
-            //kaszarnya 466, 340 < 30
-            //szenatus 706, 342 < 40
-            //kobanya 492, 385 < 40
 
         }
 

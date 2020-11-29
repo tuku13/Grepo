@@ -96,9 +96,9 @@ public class LoginScreen extends JFrame {
                 System.out.println("Sikeres belépés");
                 dispose();
                 //TODO új screen indítása
-                /*IslandChooser islandChooser = null;
+                /*IslandFrame islandChooser = null;
                 try {
-                    islandChooser = new IslandChooser(game);
+                    islandChooser = new IslandFrame(game);
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 }

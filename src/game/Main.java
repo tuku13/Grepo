@@ -52,7 +52,6 @@ public class Main {
             ObjectInputStream in = new ObjectInputStream(f);
             Game game = (Game) in.readObject();
             in.close();
-            //todo nem kell talán: game.taskManager.add(new TravellingTask(60L,null,new Army()));
             return game;
         } catch (Exception exc){
             exc.printStackTrace();

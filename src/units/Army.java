@@ -1,5 +1,8 @@
 package units;
 
+import enums.GroundUnitType;
+import enums.NavalUnitType;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +10,7 @@ import java.util.List;
 public class Army implements Serializable {
     private List<GroundUnit> groundArmy;
     private List<NavalUnit> navalArmy;
+    private boolean colonizingArmy = false;
 
 
     public Army battle(Army enemy){
@@ -56,6 +60,9 @@ public class Army implements Serializable {
     }
 
     public void add(NavalUnit u){
+        if(u.getType() == NavalUnitType.COLONY_SHIP){
+            colonizingArmy = true;
+        }
         navalArmy.add(u);
     }
 
@@ -91,8 +98,39 @@ public class Army implements Serializable {
         this.navalArmy.addAll(a.navalArmy);
     }
 
+    public double averageSpeed(){
+        if(groundArmy.size() == 0){
+            return 0;
+        }
+        double d = 0;
+        for(GroundUnit gu : groundArmy){
+            d += gu.getMaxSpeed();
+        }
+        return (d / groundArmy.size());
+    }
+
     public int usedCapacity(){
         return groundArmy.size();
+    }
+
+    public int count(GroundUnitType groundUnitType){
+        int c = 0;
+        for(GroundUnit gu : groundArmy){
+            if(gu.getType() == groundUnitType){
+                c += 1;
+            }
+        }
+        return c;
+    }
+
+    public int count(NavalUnitType navalUnitType){
+        int c = 0;
+        for(NavalUnit nu : navalArmy){
+            if(nu.getType() == navalUnitType){
+                c += 1;
+            }
+        }
+        return c;
     }
 
     public int maxCapacity(){
@@ -103,13 +141,8 @@ public class Army implements Serializable {
         return c;
     }
 
-    public boolean hasAliveNavalUnit(){
-        for(NavalUnit u : navalArmy){
-            if(u.isAlive()){
-                return true;
-            }
-        }
-        return false;
+    public boolean isColonizingArmy() {
+        return colonizingArmy;
     }
 
     public List<GroundUnit> getGroundArmy() {

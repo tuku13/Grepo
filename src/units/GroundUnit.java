@@ -91,6 +91,10 @@ public class GroundUnit extends Unit implements Ground {
         this.distanceDefence = distanceDefence;
     }
 
+    public GroundUnitType getType() {
+        return type;
+    }
+
     @Override
     public String toString() {
         return "GroundUnit{" +

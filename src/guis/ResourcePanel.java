@@ -6,7 +6,6 @@ import tasks.Tickable;
 import javax.swing.*;
 import java.awt.*;
 
-
 public class ResourcePanel extends JPanel implements Tickable {
     private ResourceStack resourceStack;
     private JLabel woodLabel,stoneLabel,silverLabel,favourLabel;
@@ -15,7 +14,7 @@ public class ResourcePanel extends JPanel implements Tickable {
     public ResourcePanel(ResourceStack resourceStack){
         this.resourceStack = resourceStack;
         flowLayout = new FlowLayout();
-        flowLayout.setHgap(120);
+        flowLayout.setHgap(60);
         flowLayout.setAlignment(FlowLayout.RIGHT);
         this.setLayout(flowLayout);
         this.setOpaque(false);
@@ -59,6 +58,10 @@ public class ResourcePanel extends JPanel implements Tickable {
         stoneLabel.setForeground(c);
         silverLabel.setForeground(c);
         favourLabel.setForeground(c);
+    }
+
+    public void setResourceStack(ResourceStack resourceStack) {
+        this.resourceStack = resourceStack;
     }
 
     @Override

@@ -48,6 +48,10 @@ public class Island implements Tickable, Serializable {
         return new Location(0,0);
     }
 
+    public String getName() {
+        return name;
+    }
+
     public HashMap<Location, City> getCities() {
         return cities;
     }

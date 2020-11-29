@@ -14,12 +14,12 @@ public class Game implements Tickable, Serializable{
     private List<Player> players;
     private List<Island> islands;
     private transient Player authenticatedPlayer;
-    public transient TaskManager taskManager;
+    //public transient TaskManager taskManager;
 
     public Game(){
         players = new ArrayList<>();
         islands = new ArrayList<>();
-        taskManager = TaskManager.getInstance();
+        //taskManager = TaskManager.getInstance();
 
         if(Main.DEBUG){
             tesztAdatokFeltöltése();//todo törlése ha nem kell
@@ -35,29 +35,31 @@ public class Game implements Tickable, Serializable{
         Island woodIsland = new Island("Wood Island",1.0,0.9,1.1,woodCities);
         City c = new City(woodIsland,"Admin városa");
         c.setPlayer(p);
+        City c2 = new City(woodIsland, "Második város");
         woodCities.put(new Location(-180,140),c);
-        woodCities.put(new Location(-160,75),null);
-        woodCities.put(new Location(20,50),null);
-        woodCities.put(new Location(100,50),null);
-        woodCities.put(new Location(-10,240),null);
+        c2.setPlayer(p);
+        woodCities.put(new Location(-160,75),c2);
+        woodCities.put(new Location(20,50),new City(woodIsland, "wood3"));
+        woodCities.put(new Location(100,50),new City(woodIsland, "wood4"));
+        woodCities.put(new Location(-10,240),new City(woodIsland, "wood5"));
         islands.add(woodIsland);
 
         HashMap<Location,City> stoneCities = new HashMap<>();
         Island stoneIsland = new Island("Stone Island",1.1,1.0,0.9,stoneCities);
-        stoneCities.put(new Location(-90,-60),null);
-        stoneCities.put(new Location(-230,-10),null);
-        stoneCities.put(new Location(-400,-65),null);
-        stoneCities.put(new Location(-370,-260),null);
-        stoneCities.put(new Location(-190,-120),null);
+        stoneCities.put(new Location(-90,-60),new City(woodIsland, "stone1"));
+        stoneCities.put(new Location(-230,-10),new City(woodIsland, "stone2"));
+        stoneCities.put(new Location(-400,-65),new City(woodIsland, "stone3"));
+        stoneCities.put(new Location(-370,-260),new City(woodIsland, "stone4"));
+        stoneCities.put(new Location(-190,-120),new City(woodIsland, "stone5"));
         islands.add(stoneIsland);
 
         HashMap<Location,City> silverCities = new HashMap<>();
         Island silverIsland = new Island("Silver Island",0.9,1.1,1.0,silverCities);
-        silverCities.put(new Location(210,-40),null);
-        silverCities.put(new Location(230,-10),null);
-        silverCities.put(new Location(400,0),null);
-        silverCities.put(new Location(320,-180),null);
-        silverCities.put(new Location(240,-140),null);
+        silverCities.put(new Location(210,-40),new City(woodIsland, "silver1"));
+        silverCities.put(new Location(230,-10),new City(woodIsland, "silver2"));
+        silverCities.put(new Location(400,0),new City(woodIsland, "silver3"));
+        silverCities.put(new Location(320,-180),new City(woodIsland, "silver4"));
+        silverCities.put(new Location(240,-140),new City(woodIsland, "silver5"));
         islands.add(silverIsland);
     }
 

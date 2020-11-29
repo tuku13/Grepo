@@ -18,7 +18,6 @@ public class WarTask extends Task{
         Army winner = army.battle(target.getArmy());
         if(winner == army){
             double distance = city.getIsland().getLocation(city).distance(target.getIsland().getLocation(target));
-            long time = 0; //TODO utazási idő kiszámítása
             TaskManager.getInstance().add(new TravellingTask(time,city,army));
         }
     }

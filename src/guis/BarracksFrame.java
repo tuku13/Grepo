@@ -66,7 +66,6 @@ public class BarracksFrame extends JFrame {
         }
 
         this.setMinimumSize(new Dimension(800,600));
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     private class TrainUnitListener implements ActionListener {
