@@ -8,15 +8,17 @@ import javax.swing.*;
 import java.awt.*;
 
 public class UnitPanel  extends JPanel {
-    City city;
+    private City city;
 
-    public UnitPanel(City city, boolean isGround,boolean needSpinner){
+    public UnitPanel(City city, boolean isGround){
         this.city = city;
+        this.setBackground(new Color(254,225,157));
 
         if(isGround){
             this.setLayout(new GridLayout(1, GroundUnitType.values().length));
             for(GroundUnitType groundUnitType : GroundUnitType.values()){
                 JPanel groundUnitPanel = new JPanel();
+                groundUnitPanel.setBackground(new Color(254,225,157));
                 groundUnitPanel.setLayout(new GridLayout(3,1));
 
                 JLabel nameLabel = new JLabel(groundUnitType.getName());
@@ -36,11 +38,6 @@ public class UnitPanel  extends JPanel {
                 middlePanel.add(maxCountLabel);
                 groundUnitPanel.add(middlePanel);
 
-                if(needSpinner){
-                    JSpinner spinner = new JSpinner(new SpinnerNumberModel(0,0,maxCount,1));
-                    groundUnitPanel.add(spinner);
-                }
-
                 this.add(groundUnitPanel);
             }
         }
@@ -48,6 +45,7 @@ public class UnitPanel  extends JPanel {
             this.setLayout(new GridLayout(1, NavalUnitType.values().length));
             for(NavalUnitType navalUnitType : NavalUnitType.values()){
                 JPanel navalUnitPanel = new JPanel();
+                navalUnitPanel.setBackground(new Color(254,225,157));
                 navalUnitPanel.setLayout(new GridLayout(3,1));
 
                 JLabel nameLabel = new JLabel(navalUnitType.getName());
@@ -66,11 +64,6 @@ public class UnitPanel  extends JPanel {
                 maxCountLabel.setText(maxCount + "");
                 middlePanel.add(maxCountLabel);
                 navalUnitPanel.add(middlePanel);
-
-                if(needSpinner){
-                    JSpinner spinner = new JSpinner(new SpinnerNumberModel(0,0,maxCount,1));
-                    navalUnitPanel.add(spinner);
-                }
 
                 this.add(navalUnitPanel);
             }

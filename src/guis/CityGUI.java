@@ -47,6 +47,10 @@ public class CityGUI extends JFrame {
         islandsButton.addActionListener(new ClickIslandButtonListener());
         header.add(islandsButton);
 
+        JButton armyButton = new JButton("Katonák");
+        armyButton.addActionListener(new ViewArmyListener());
+        header.add(armyButton);
+
         this.comboBox = new JComboBox(new IslandModel(game.getIslands(),game.getAuthenticatedPlayer()));
         this.city = (City) comboBox.getSelectedItem();
         comboBox.addItemListener(new ChangeCityListener());
@@ -76,6 +80,18 @@ public class CityGUI extends JFrame {
                 openedFrame.dispose();
             }
             openedFrame = new NotificationFrame(city);
+            openedFrame.setVisible(true);
+        }
+    }
+
+    private class ViewArmyListener implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(openedFrame != null){
+                openedFrame.dispose();
+            }
+            openedFrame = new ArmyFrame(city);
             openedFrame.setVisible(true);
         }
     }

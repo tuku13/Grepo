@@ -15,7 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class SenateFrame extends JFrame {
-    City city;
+    private City city;
 
     public SenateFrame(City city){
         this.city = city;

@@ -16,8 +16,7 @@ public class BuildingTask extends Task {
 
     @Override
     public String toString() {
-        String str = (Math.round(time / 3600)) + ":" +  (time / 60) + ":" + (time % 60);
-        return building.getBuildingType().getName() + " lvl " + (building.getLevel()+1) + "-re, hátralévő idő: " + str;
+        return "Épület fejlesztése: " + building.getBuildingType().getName() + " lvl " + (building.getLevel()+1);
     }
 
     @Override

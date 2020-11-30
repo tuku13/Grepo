@@ -32,7 +32,7 @@ public final class City implements Tickable, Serializable {
         buildings.add(new Building(BuildingType.HARBOR,0,this));
         buildings.add(new Building(BuildingType.TEMPLE,0,this));
 
-    this.army = new Army();
+        this.army = new Army();
         defeatTime = 0;
     }
 

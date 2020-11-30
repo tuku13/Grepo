@@ -12,7 +12,6 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class LoginScreen extends JFrame {
-
     private JTextField nameField;
     private JPasswordField passwordField;
     private JButton registerButton,loginButton;

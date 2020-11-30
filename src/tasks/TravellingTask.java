@@ -16,4 +16,9 @@ public class TravellingTask extends Task{
         city.getArmy().add(army);
     }
 
+    @Override
+    public String toString() {
+        return "Hadsereg érkezik: " + city.getName() + " nevű városba";
+    }
+
 }

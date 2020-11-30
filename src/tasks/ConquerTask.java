@@ -16,6 +16,10 @@ public class ConquerTask extends WarTask {
             target.conquer(city.getPlayer());
             target.getArmy().add(army);
         }
+    }
 
+    @Override
+    public String toString() {
+        return "Város elfoglalási kísérlet: " + target;
     }
 }

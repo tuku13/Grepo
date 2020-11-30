@@ -1,8 +1,11 @@
 package game;
 
 import com.sun.istack.internal.NotNull;
+import enums.GroundUnitType;
 import tasks.TaskManager;
 import tasks.Tickable;
+import units.Army;
+import units.GroundUnit;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -34,6 +37,15 @@ public class Game implements Tickable, Serializable{
         HashMap<Location,City> woodCities = new HashMap<>();
         Island woodIsland = new Island("Wood Island",1.0,0.9,1.1,woodCities);
         City c = new City(woodIsland,"Admin városa");
+        Army a = new Army();
+        a.add(new GroundUnit(GroundUnitType.SWORDSMAN));
+        a.add(new GroundUnit(GroundUnitType.SWORDSMAN));
+        a.add(new GroundUnit(GroundUnitType.SWORDSMAN));
+        a.add(new GroundUnit(GroundUnitType.SWORDSMAN));
+        a.add(new GroundUnit(GroundUnitType.SWORDSMAN));
+        a.add(new GroundUnit(GroundUnitType.ARCHER));
+        a.add(new GroundUnit(GroundUnitType.HOPLITE));
+        c.getArmy().add(a);
         c.setPlayer(p);
         City c2 = new City(woodIsland, "Második város");
         woodCities.put(new Location(-180,140),c);

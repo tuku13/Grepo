@@ -5,6 +5,8 @@ import enums.NavalUnitType;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 public class Army implements Serializable {
@@ -14,6 +16,12 @@ public class Army implements Serializable {
 
 
     public Army battle(Army enemy){
+        if(groundArmy.size() == 0){
+            return enemy;
+        }
+        if(enemy.groundArmy.size() == 0){
+            return this;
+        }
         GroundUnit offensiveGroundUnit = this.getGroundUnit(0);
         GroundUnit defensiveGroundUnit = enemy.getGroundUnit(0);
 
@@ -107,6 +115,52 @@ public class Army implements Serializable {
             d += gu.getMaxSpeed();
         }
         return (d / groundArmy.size());
+    }
+
+    public GroundUnit remove(GroundUnitType type){
+        Iterator<GroundUnit> it = this.groundArmy.iterator();
+        while (it.hasNext()){
+            GroundUnit groundUnit = it.next();
+            if(groundUnit.getType() == type){
+                it.remove();
+                return groundUnit;
+            }
+        }
+        return null;
+    }
+
+    public NavalUnit remove(NavalUnitType type){
+        Iterator<NavalUnit> it = this.navalArmy.iterator();
+        while (it.hasNext()){
+            NavalUnit navalUnit = it.next();
+            if(navalUnit.getType() == type){
+                it.remove();
+                return navalUnit;
+            }
+        }
+        return null;
+    }
+
+    public void moveGroundUnits(Army from, HashMap<GroundUnitType, Integer> groundTypes){
+        for(GroundUnitType type : groundTypes.keySet()){
+            for (int i = 0; i <= groundTypes.get(type) - 1;i++){
+                GroundUnit gu = from.remove(type);
+                if(gu != null){
+                    this.add(gu);
+                }
+            }
+        }
+    }
+
+    public void moveNavalUnits(Army from, HashMap<NavalUnitType, Integer> navalTypes){
+        for(NavalUnitType type : navalTypes.keySet()){
+            for (int i = 0; i <= navalTypes.get(type) - 1;i++){
+                NavalUnit nu = from.remove(type);
+                if(nu != null){
+                    this.add(nu);
+                }
+            }
+        }
     }
 
     public int usedCapacity(){

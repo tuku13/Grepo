@@ -4,6 +4,7 @@ import com.sun.istack.internal.NotNull;
 import enums.BuildingType;
 import exceptions.BuildingReachedMaxLevel;
 import game.City;
+import tasks.Task;
 import tasks.Tickable;
 
 import java.io.Serializable;
@@ -12,6 +13,7 @@ public class Building implements Serializable, Tickable {
     protected final City city;
     protected final BuildingType buildingType;
     protected int level;
+    protected Task task;
 
     public Building(BuildingType buildingType,int level,@NotNull City city){
         this.buildingType = buildingType;
@@ -31,6 +33,9 @@ public class Building implements Serializable, Tickable {
 
     @Override
     public void tick(){
+        if(task != null && task.isExecuted()){
+            task = null;
+        }
         switch (buildingType){
             case QUARRY:
                 city.getResources().add(0,(level * 20.0 * city.getIsland().getStoneMultiplier()) / 1800,0);
@@ -45,6 +50,14 @@ public class Building implements Serializable, Tickable {
                 city.getResources().add(0,0,0,(level * 25.0) / 1800);
                 break;
         }
+    }
+
+    public boolean hasTask(){
+        return (task != null);
+    }
+
+    public void setTask(Task task) {
+        this.task = task;
     }
 
     public BuildingType getBuildingType() {
