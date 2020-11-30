@@ -2,10 +2,12 @@ package game;
 
 import com.sun.istack.internal.NotNull;
 import enums.GroundUnitType;
+import enums.NavalUnitType;
 import tasks.TaskManager;
 import tasks.Tickable;
 import units.Army;
 import units.GroundUnit;
+import units.NavalUnit;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -45,6 +47,8 @@ public class Game implements Tickable, Serializable{
         a.add(new GroundUnit(GroundUnitType.SWORDSMAN));
         a.add(new GroundUnit(GroundUnitType.ARCHER));
         a.add(new GroundUnit(GroundUnitType.HOPLITE));
+        a.add(new NavalUnit(NavalUnitType.TRANSPORT_BOAT));
+        a.add(new NavalUnit(NavalUnitType.COLONY_SHIP));
         c.getArmy().add(a);
         c.setPlayer(p);
         City c2 = new City(woodIsland, "Második város");
@@ -58,20 +62,20 @@ public class Game implements Tickable, Serializable{
 
         HashMap<Location,City> stoneCities = new HashMap<>();
         Island stoneIsland = new Island("Stone Island",1.1,1.0,0.9,stoneCities);
-        stoneCities.put(new Location(-90,-60),new City(woodIsland, "stone1"));
-        stoneCities.put(new Location(-230,-10),new City(woodIsland, "stone2"));
-        stoneCities.put(new Location(-400,-65),new City(woodIsland, "stone3"));
-        stoneCities.put(new Location(-370,-260),new City(woodIsland, "stone4"));
-        stoneCities.put(new Location(-190,-120),new City(woodIsland, "stone5"));
+        stoneCities.put(new Location(-90,-60),new City(stoneIsland, "stone1"));
+        stoneCities.put(new Location(-230,-10),new City(stoneIsland, "stone2"));
+        stoneCities.put(new Location(-400,-65),new City(stoneIsland, "stone3"));
+        stoneCities.put(new Location(-370,-260),new City(stoneIsland, "stone4"));
+        stoneCities.put(new Location(-190,-120),new City(stoneIsland, "stone5"));
         islands.add(stoneIsland);
 
         HashMap<Location,City> silverCities = new HashMap<>();
         Island silverIsland = new Island("Silver Island",0.9,1.1,1.0,silverCities);
-        silverCities.put(new Location(210,-40),new City(woodIsland, "silver1"));
-        silverCities.put(new Location(230,-10),new City(woodIsland, "silver2"));
-        silverCities.put(new Location(400,0),new City(woodIsland, "silver3"));
-        silverCities.put(new Location(320,-180),new City(woodIsland, "silver4"));
-        silverCities.put(new Location(240,-140),new City(woodIsland, "silver5"));
+        silverCities.put(new Location(210,-40),new City(silverIsland, "silver1"));
+        silverCities.put(new Location(230,-10),new City(silverIsland, "silver2"));
+        silverCities.put(new Location(400,0),new City(silverIsland, "silver3"));
+        silverCities.put(new Location(320,-180),new City(silverIsland, "silver4"));
+        silverCities.put(new Location(240,-140),new City(silverIsland, "silver5"));
         islands.add(silverIsland);
     }
 

@@ -3,6 +3,8 @@ package tasks;
 import game.City;
 import units.Army;
 
+import javax.swing.*;
+
 public class ConquerTask extends WarTask {
     public ConquerTask(Long l, City city, Army army, City target) {
         super(l, city, army, target);
@@ -15,7 +17,11 @@ public class ConquerTask extends WarTask {
         if(winner == army){
             target.conquer(city.getPlayer());
             target.getArmy().add(army);
+            JOptionPane.showMessageDialog(null,target.getName() + " nevű várost elfoglaltad!.","Információ",JOptionPane.INFORMATION_MESSAGE);
+            return;
         }
+
+        JOptionPane.showMessageDialog(null,target.getName() + " elfoglalása nem sikerült.","Információ",JOptionPane.ERROR_MESSAGE);
     }
 
     @Override

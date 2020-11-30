@@ -13,12 +13,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SenateFrame extends JFrame {
     private City city;
+    private List<JButton> buttons;
 
     public SenateFrame(City city){
         this.city = city;
+        this.buttons = new ArrayList<>();
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setTitle(BuildingType.SENATE.getName() + " lvl " + city.getBuilding(BuildingType.SENATE).getLevel());
         this.setResizable(false);
@@ -49,6 +53,7 @@ public class SenateFrame extends JFrame {
             if(b.getLevel() != b.getBuildingType().getMaxLevel()){
 
                 JButton buildButton = new JButton();
+                buttons.add(buildButton);
                 buildButton.setHorizontalAlignment(SwingConstants.RIGHT);
                 buildButton.addActionListener(new upgradeBuildingListener(b,buildingCost,buildingTime));
                 panel.add(buildButton);
@@ -65,11 +70,21 @@ public class SenateFrame extends JFrame {
                 }
             }
 
+            if(city.getBuilding(BuildingType.SENATE).hasTask()){
+                disableButtons();
+            }
+
             this.add(panel);
         }
 
         this.setMinimumSize(new Dimension(700,600));
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    }
+
+    private void disableButtons() {
+        for(JButton b: buttons){
+            b.setEnabled(false);
+        }
     }
 
     private class upgradeBuildingListener implements ActionListener {

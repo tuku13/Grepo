@@ -19,7 +19,6 @@ public abstract class Task implements Serializable {
     protected abstract void execute();
 
     public final void tick() {
-        System.out.println(this + ": " + this.time);
         if(active && !executed){
             --time;
             if(time <= 0){

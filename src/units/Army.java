@@ -12,8 +12,6 @@ import java.util.List;
 public class Army implements Serializable {
     private List<GroundUnit> groundArmy;
     private List<NavalUnit> navalArmy;
-    private boolean colonizingArmy = false;
-
 
     public Army battle(Army enemy){
         if(groundArmy.size() == 0){
@@ -67,11 +65,8 @@ public class Army implements Serializable {
         groundArmy.add(u);
     }
 
-    public void add(NavalUnit u){
-        if(u.getType() == NavalUnitType.COLONY_SHIP){
-            colonizingArmy = true;
-        }
-        navalArmy.add(u);
+    public void add(NavalUnit n) {
+        navalArmy.add(n);
     }
 
     public boolean hasAliveGroundUnit(){
@@ -196,7 +191,12 @@ public class Army implements Serializable {
     }
 
     public boolean isColonizingArmy() {
-        return colonizingArmy;
+        for(NavalUnit navalUnit : navalArmy){
+            if(navalUnit.getType() == NavalUnitType.COLONY_SHIP){
+                return true;
+            }
+        }
+        return false;
     }
 
     public List<GroundUnit> getGroundArmy() {

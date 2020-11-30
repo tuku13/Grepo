@@ -3,6 +3,8 @@ package tasks;
 import game.City;
 import units.Army;
 
+import javax.swing.*;
+
 public class TravellingTask extends Task{
     private Army army;
 
@@ -14,6 +16,7 @@ public class TravellingTask extends Task{
     @Override
     protected void execute() {
         city.getArmy().add(army);
+        JOptionPane.showMessageDialog(null,"A katonák megérkeztek " + city.getName() + " városba.","Információ",JOptionPane.INFORMATION_MESSAGE);
     }
 
     @Override

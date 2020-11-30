@@ -3,7 +3,6 @@ package guis;
 import enums.GroundUnitType;
 import enums.NavalUnitType;
 import game.City;
-import guis.UnitPanel;
 import tasks.ConquerTask;
 import tasks.TaskManager;
 import tasks.WarTask;
@@ -154,17 +153,31 @@ public class StartWarFrame extends JFrame {
             army.moveGroundUnits(from.getArmy(),chosenGroundUnits);
             army.moveNavalUnits(from.getArmy(),chosenNavalUnits);
 
+            if(army.usedCapacity() == 0){
+                JOptionPane.showMessageDialog(null,"Nem választottál még ki katonákat!","Információ",JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+
             double speed = army.averageSpeed();
             double distance = from.getIsland().getLocation(from).distance(to.getIsland().getLocation(to));
-
-
             long time = Math.round(distance / speed);
+
+            if(from.getIsland() != to.getIsland()){
+                if(army.usedCapacity() >= army.maxCapacity()){
+                    JOptionPane.showMessageDialog(null,"A városod és a támadni kívánt város, másik szigeten van, ezért szükség van hajókra is. Szükséges helyek száma: "
+                            + army.usedCapacity() + ", hajók által biztosított: " + army.maxCapacity(),"Információ",JOptionPane.INFORMATION_MESSAGE);
+                    from.getArmy().add(army);
+                    return;
+                }
+            }
 
             if(army.isColonizingArmy()){
                 TaskManager.getInstance().add(new ConquerTask(time,from,army,to));
+                JOptionPane.showMessageDialog(null,"Foglalási kísérlet elindítva " + to.getName() + " város felé.","Információ",JOptionPane.INFORMATION_MESSAGE);
             }
             else{
                 TaskManager.getInstance().add(new WarTask(time,from,army,to));
+                JOptionPane.showMessageDialog(null,"Támadás elindítva " + to.getName() + " város felé.","Információ",JOptionPane.INFORMATION_MESSAGE);
             }
             dispose();
         }

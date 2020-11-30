@@ -1,20 +1,13 @@
 package game;
 
-import enums.GroundUnitType;
 import guis.LoginScreen;
-import tasks.TaskManager;
-import tasks.TravellingTask;
-import tasks.WarTask;
-import units.Army;
-import units.GroundUnit;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
-import java.util.HashMap;
 
 public class Main {
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
     public static void main(String[] args){
 
         /*HashMap<Location,City> cityHashMap = new HashMap<>();
@@ -57,7 +50,6 @@ public class Main {
         LoginScreen loginScreen = new LoginScreen(game);
         loginScreen.setVisible(true);
 
-        //IslandManagerGUI gui = new IslandManagerGUI(game,game.getIslands().get(0).getCities());
     }
 
     private static Game loadGame(){

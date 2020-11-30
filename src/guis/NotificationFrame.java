@@ -1,20 +1,20 @@
 package guis;
 
-import enums.BuildingType;
-import enums.GroundUnitType;
 import game.City;
-import game.ResourceStack;
 import tasks.Task;
 import tasks.TaskManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
 public class NotificationFrame extends JFrame {
     private City city;
     private List<Task> tasks;
+    private JPanel panel;
 
     public NotificationFrame(City city) {
         this.city = city;
@@ -22,6 +22,10 @@ public class NotificationFrame extends JFrame {
         this.setTitle("Értesítések");
         this.setResizable(false);
 
+        init();
+    }
+
+    private void init(){
         tasks = new ArrayList<>();
 
         for(Task t : TaskManager.getInstance().getTasks()){
@@ -34,7 +38,7 @@ public class NotificationFrame extends JFrame {
 
         if(tasks.size() > 0){
             for(Task t : tasks){
-                JPanel panel = new JPanel();
+                panel = new JPanel();
                 panel.setBackground(new Color(254,225,157));
                 panel.setLayout(new FlowLayout());
                 JLabel nameLabel = new JLabel(t.toString());
@@ -58,6 +62,6 @@ public class NotificationFrame extends JFrame {
             this.add(label);
             this.setMinimumSize(new Dimension(400,100));
         }
-
     }
+
 }

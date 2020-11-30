@@ -1,11 +1,7 @@
 package guis;
 
-import enums.BuildingType;
 import game.City;
 import game.Game;
-import game.Island;
-import game.Location;
-import models.IslandModel;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -14,7 +10,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 
 public class IslandFrame extends JFrame {
     private Game game;
@@ -47,10 +42,8 @@ public class IslandFrame extends JFrame {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-            System.out.println(e.getPoint());
 
             if((new Point(190,566)).distance(e.getPoint()) <= 250){
-                System.out.println("bal oldali");
                 if(openedFrame != null){
                     openedFrame.dispose();
                 }
@@ -59,7 +52,6 @@ public class IslandFrame extends JFrame {
             }
 
             if((new Point(470,140)).distance(e.getPoint()) <= 200){
-                System.out.println("középső");
                 if(openedFrame != null){
                     openedFrame.dispose();
                 }
@@ -68,7 +60,6 @@ public class IslandFrame extends JFrame {
             }
 
             if((new Point(911,454)).distance(e.getPoint()) <= 300){
-                System.out.println("jobb oldali");
                 if(openedFrame != null){
                     openedFrame.dispose();
                 }

@@ -11,13 +11,13 @@ import javax.swing.event.ListDataListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IslandModel implements ComboBoxModel {
+public class CityModel implements ComboBoxModel {
     private City selected = null;
     private List<Island> islands;
     private Player player;
     private List<City> cities;
 
-    public IslandModel(List<Island> islands,Player player){
+    public CityModel(List<Island> islands, Player player){
         this.islands = islands;
         this.player = player;
         initCities();
@@ -36,6 +36,10 @@ public class IslandModel implements ComboBoxModel {
                 }
             }
         }
+    }
+
+    public void addCity(City city){
+        cities.add(city);
     }
 
     @Override

@@ -1,26 +1,28 @@
 package guis;
 
 import enums.BuildingType;
-import enums.GroundUnitType;
 import enums.NavalUnitType;
 import game.City;
 import game.ResourceStack;
 import tasks.TaskManager;
 import tasks.UnitTrainingTask;
 import units.Army;
-import units.GroundUnit;
 import units.NavalUnit;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class HarborFrame extends JFrame {
     private City city;
+    private List<JButton> buttons;
 
     public HarborFrame(City city){
         this.city = city;
+        this.buttons = new ArrayList<>();
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setTitle(BuildingType.HARBOR.getName() + " lvl " + city.getBuilding(BuildingType.HARBOR).getLevel());
         this.setResizable(true);
@@ -48,6 +50,7 @@ public class HarborFrame extends JFrame {
             panel.add(timeLabel);
 
             JButton trainButton = new JButton();
+            buttons.add(trainButton);
             trainButton.setHorizontalAlignment(SwingConstants.RIGHT);
             trainButton.addActionListener(new TrainUnitListener(city,nu));
             panel.add(trainButton);
@@ -63,11 +66,21 @@ public class HarborFrame extends JFrame {
                 trainButton.setText("Szükséges kikötő szint: lvl " + nu.getRequiredLevel());
             }
 
+            if(city.getBuilding(BuildingType.HARBOR).hasTask()){
+                disableButtons();
+            }
+
             this.add(panel);
         }
 
         this.setMinimumSize(new Dimension(900,400));
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    }
+
+    private void disableButtons() {
+        for(JButton b : buttons){
+            b.setEnabled(false);
+        }
     }
 
     private class TrainUnitListener implements ActionListener {
@@ -84,6 +97,7 @@ public class HarborFrame extends JFrame {
             Army army = new Army();
             army.add(new NavalUnit(navalUnitType));
             TaskManager.getInstance().add(new UnitTrainingTask(navalUnitType.getTrainingTime(),city,army));
+            dispose();
         }
     }
 }

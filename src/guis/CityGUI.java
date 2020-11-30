@@ -3,7 +3,7 @@ package guis;
 import enums.BuildingType;
 import game.City;
 import game.Game;
-import models.IslandModel;
+import models.CityModel;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -39,7 +39,7 @@ public class CityGUI extends JFrame {
         JPanel header = new ImagePanel(ImageIO.read(new File("images/header.png")));
         FlowLayout flowLayout = new FlowLayout(FlowLayout.RIGHT);
         header.setLayout(flowLayout);
-        JButton notificationButton = new JButton("Folyamatok");
+        JButton notificationButton = new JButton("Értesítések");
         notificationButton.addActionListener(new ClickNotificationButtonListener());
         header.add(notificationButton);
 
@@ -51,16 +51,18 @@ public class CityGUI extends JFrame {
         armyButton.addActionListener(new ViewArmyListener());
         header.add(armyButton);
 
-        this.comboBox = new JComboBox(new IslandModel(game.getIslands(),game.getAuthenticatedPlayer()));
+        this.comboBox = new JComboBox(new CityModel(game.getIslands(),game.getAuthenticatedPlayer()));
         this.city = (City) comboBox.getSelectedItem();
         comboBox.addItemListener(new ChangeCityListener());
         header.add(comboBox,BorderLayout.CENTER);
         resourcePanel = new ResourcePanel(city.getResources());
         header.add(resourcePanel,BorderLayout.EAST);
 
+        Timer comboBoxTimer = new Timer(5000,new RefreshComboBox());
+        comboBoxTimer.start();
+
         this.add(panel,BorderLayout.CENTER);
         this.add(header,BorderLayout.NORTH);
-
     }
 
     private class TickListener implements ActionListener{
@@ -128,7 +130,6 @@ public class CityGUI extends JFrame {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-            System.out.println(e.getPoint());
 
             //templom 456, 303 < 30
             if((new Point(456, 303)).distance(e.getPoint()) <= 30){
@@ -206,5 +207,12 @@ public class CityGUI extends JFrame {
 
         @Override
         public void mouseExited(MouseEvent e) { }
+    }
+
+    private class RefreshComboBox implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            CityModel cityModel = (CityModel) comboBox.getModel();
+        }
     }
 }
