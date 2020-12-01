@@ -15,12 +15,20 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Hadjáart indító ablak
+ */
 public class StartWarFrame extends JFrame {
     private City from,to;
     private Army army;
     private HashMap<GroundUnitType,JSpinner> groundUnitSpinner;
     private HashMap<NavalUnitType,JSpinner> navalUnitSpinner;
 
+    /**
+     * Konstruktor
+     * @param from honnan
+     * @param to hova
+     */
     public StartWarFrame(City from, City to){
         this.from = from;
         this.to = to;
@@ -31,6 +39,9 @@ public class StartWarFrame extends JFrame {
         init();
     }
 
+    /**
+     * Inicializálja a komponenseket
+     */
     private void init(){
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setLayout(new GridBagLayout());
@@ -68,6 +79,10 @@ public class StartWarFrame extends JFrame {
 
     }
 
+    /**
+     * Szárazföldi egységek panelt étrehozza
+     * @return szárazföldi egységek panel
+     */
     private JPanel initGroundPanel(){
         JPanel panel = new JPanel();
         groundUnitSpinner = new HashMap<>();
@@ -102,6 +117,10 @@ public class StartWarFrame extends JFrame {
         return panel;
     }
 
+    /**
+     * Vízi egységek panelt étrehozza
+     * @return vízi egységek panel
+     */
     private JPanel initNavalPanel(){
         JPanel panel = new JPanel();
         navalUnitSpinner = new HashMap<>();
@@ -136,6 +155,9 @@ public class StartWarFrame extends JFrame {
         return panel;
     }
 
+    /**
+     * Gombnyomásra elindítja a támadást vagy foglalást attól függően, hogy van-e gyarmatosító hajó
+     */
     private class StartWarListener implements ActionListener{
 
         @Override

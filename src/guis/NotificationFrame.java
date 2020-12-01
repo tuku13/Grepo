@@ -9,11 +9,18 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Városhoz tartozó folyamatokat megjelenítő ablak
+ */
 public class NotificationFrame extends JFrame {
     private City city;
     private List<Task> tasks;
     private JPanel panel;
 
+    /**
+     * Konstruktor
+     * @param city város
+     */
     public NotificationFrame(City city) {
         this.city = city;
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -23,6 +30,9 @@ public class NotificationFrame extends JFrame {
         init();
     }
 
+    /**
+     * Kirajzolja egymás alá az éppen futó folyamatokat
+     */
     private void init(){
         tasks = new ArrayList<>();
 

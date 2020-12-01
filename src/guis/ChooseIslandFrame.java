@@ -11,11 +11,18 @@ import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Város alapitáshoz sziget megjelenítő Frame
+ */
 public class ChooseIslandFrame extends JFrame {
     private Game game;
     private JPanel panel;
     private JFrame openedFrame;
 
+    /**
+     * Konstruktor
+     * @param game játék
+     */
     public ChooseIslandFrame(Game game){
         this.game = game;
         this.setTitle("Grepo - Válassz szigetet, majd várost!");
@@ -35,6 +42,9 @@ public class ChooseIslandFrame extends JFrame {
 
     }
 
+    /**
+     * Egér lenyomás-kor megnyitja a megfelelő szigetet
+     */
     private class ClickIslandEvent implements MouseListener{
         private JFrame chooseIslandFrame;
 

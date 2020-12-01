@@ -8,17 +8,28 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Bejelentkező ablak
+ */
 public class LoginFrame extends JFrame {
     private JTextField nameField;
     private JPasswordField passwordField;
     private JButton registerButton,loginButton;
     private Game game;
 
+    /**
+     * Konstruktor
+     * @param game játék
+     * @throws HeadlessException
+     */
     public LoginFrame(Game game) throws HeadlessException {
         this.game = game;
         init();
     }
 
+    /**
+     * Kirajzolja a grafikát
+     */
     private void init(){
         this.setTitle("Grepo - Bejelentkezés");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -56,6 +67,9 @@ public class LoginFrame extends JFrame {
         this.add(mainPanel,BorderLayout.CENTER);
     }
 
+    /**
+     * Kezeli a regisztráló gombot
+     */
     private class RegisterButtonListener implements ActionListener{
 
         @Override
@@ -80,6 +94,9 @@ public class LoginFrame extends JFrame {
         }
     }
 
+    /**
+     * Kezeli a bejelentkezés gombot, ha sikeres betölti a játékhoz tartozó ablakokat
+     */
     private class LoginButtonListener implements ActionListener{
 
         @Override

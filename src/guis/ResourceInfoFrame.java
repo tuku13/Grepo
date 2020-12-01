@@ -7,11 +7,19 @@ import game.City;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Táblázatba kiírja az szintenkénti termelését
+ */
 public class ResourceInfoFrame extends JFrame {
     private City city;
     private Building building;
     private ResourceModel data;
 
+    /**
+     * Konstruktor
+     * @param c város
+     * @param b épület
+     */
     public ResourceInfoFrame(City c, Building b){
         super(b.getBuildingType().getName() + " lvl " + b.getLevel());
         this.building = b;
@@ -38,6 +46,9 @@ public class ResourceInfoFrame extends JFrame {
         initComponents();
     }
 
+    /**
+     * Inicializálja a komponenseket
+     */
     private void initComponents(){
         JTable table = new JTable(data);
         table.setFillsViewportHeight(true);

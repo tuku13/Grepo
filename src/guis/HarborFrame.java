@@ -17,10 +17,17 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Egységek képzéséhez szükséges Kikötő ablak
+ */
 public class HarborFrame extends JFrame {
     private City city;
     private List<JButton> buttons;
 
+    /**
+     * Konstruktor
+     * @param city város
+     */
     public HarborFrame(City city){
         this.city = city;
         this.buttons = new ArrayList<>();
@@ -78,12 +85,18 @@ public class HarborFrame extends JFrame {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
+    /**
+     * Kikapcsolja a gombokat
+     */
     private void disableButtons() {
         for(JButton b : buttons){
             b.setEnabled(false);
         }
     }
 
+    /**
+     * Gombnyomásra elindítja egy vízi egység kiképzését
+     */
     private class TrainUnitListener implements ActionListener {
         City city;
         NavalUnitType navalUnitType;

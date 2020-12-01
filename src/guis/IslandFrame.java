@@ -12,13 +12,21 @@ import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Sziget nézet, szigetre kattintva meg lehet támadni a megjelenő városokat
+ */
 public class IslandFrame extends JFrame {
     private Game game;
     private JPanel panel;
     private City city;
     private JFrame openedFrame;
 
-    public IslandFrame(Game game,City city) throws HeadlessException, IOException {
+    /**
+     * Konstruktor
+     * @param game játék
+     * @param city játékos szigete
+     */
+    public IslandFrame(Game game,City city) {
         this.game = game;
         this.city = city;
         this.setTitle("Grepo - Sziget nézet");
@@ -26,13 +34,20 @@ public class IslandFrame extends JFrame {
         this.setSize(1024,768);
         this.setResizable(false);
 
-        panel = new ImagePanel(ImageIO.read(new File("images/islands.png")));
+        try {
+            panel = new ImagePanel(ImageIO.read(new File("images/islands.png")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         panel.setSize(1024,768);
         panel.addMouseListener(new ClickIslandEvent());
 
         this.add(panel,BorderLayout.CENTER);
     }
 
+    /**
+     * Szigetre kattintva megjeleníti a rajta lévő szigeteket egy ablakban
+     */
     private class ClickIslandEvent implements MouseListener{
 
         @Override

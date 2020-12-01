@@ -8,11 +8,19 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Város alapításakor megjelenő, város név beállító ablak
+ */
 public class SetCityNameFrame extends JFrame {
     private Game game;
     private City city;
     private JTextField cityNameTextField;
 
+    /**
+     * Konstruktor
+     * @param game játék
+     * @param city melyik városnak szeretné beállítani a nevét
+     */
     public SetCityNameFrame(Game game, City city){
         this.game = game;
         this.city = city;
@@ -20,6 +28,9 @@ public class SetCityNameFrame extends JFrame {
         init();
     }
 
+    /**
+     * Elemek inicializálása
+     */
     private void init() {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setMinimumSize(new Dimension(500,300));
@@ -45,6 +56,9 @@ public class SetCityNameFrame extends JFrame {
         this.add(foundButton,gc);
     }
 
+    /**
+     * Megalapítja a várost és megjeleníti a város menüt
+     */
     private class FoundCityListener implements ActionListener{
 
         @Override

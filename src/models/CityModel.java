@@ -9,6 +9,9 @@ import javax.swing.event.ListDataListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Városok combobox-ban megjelenítő modellje
+ */
 public class CityModel implements ComboBoxModel {
     private City selected = null;
     private List<Island> islands;
@@ -25,6 +28,9 @@ public class CityModel implements ComboBoxModel {
         }
     }
 
+    /**
+     * Inicializálja a komponenseket
+     */
     public void initCities(){
         cities = new ArrayList<>();
         for(Island i : islands){
@@ -36,7 +42,6 @@ public class CityModel implements ComboBoxModel {
             }
         }
     }
-
 
     @Override
     public void setSelectedItem(Object anItem) {

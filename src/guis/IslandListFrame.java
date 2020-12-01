@@ -9,6 +9,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Kiírja a szigethez tartozó városokat
+ */
 public class IslandListFrame extends JFrame {
     private Game game;
     private Island island;
@@ -45,8 +48,11 @@ public class IslandListFrame extends JFrame {
         }
 
     }
-    private class AttackCityListener implements ActionListener{
 
+    /**
+     * Gomb nyomásra megnyitja a támadás tervező ablakot
+     */
+    private class AttackCityListener implements ActionListener{
         City from,to;
 
         public AttackCityListener(City from, City to){

@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Erőforrások támblázatban megjelenő modellje
+ */
 public class ResourceModel extends AbstractTableModel {
 
     private List<Double> resourcePerHour = new ArrayList<>();

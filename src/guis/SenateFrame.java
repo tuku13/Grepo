@@ -17,6 +17,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Épületek fejlesztését megjelenítő ablak
+ */
 public class SenateFrame extends JFrame {
     private City city;
     private List<JButton> buttons;
@@ -28,6 +31,9 @@ public class SenateFrame extends JFrame {
         init();
     }
 
+    /**
+     * Komponenseket inicializál és megjelenít
+     */
     private void init(){
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setTitle(BuildingType.SENATE.getName() + " lvl " + city.getBuilding(BuildingType.SENATE).getLevel());
@@ -86,12 +92,18 @@ public class SenateFrame extends JFrame {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
+    /**
+     * Letiltja a dombokat
+     */
     private void disableButtons() {
         for(JButton b: buttons){
             b.setEnabled(false);
         }
     }
 
+    /**
+     * Gombra kattintva elindítja a kiválasztott éplüet fejlesztését
+     */
     private class upgradeBuildingListener implements ActionListener {
         private Building building;
         private ResourceStack cost;

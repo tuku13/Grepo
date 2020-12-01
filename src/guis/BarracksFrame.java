@@ -18,11 +18,18 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Egységek képzéséhez szükséges Kaszárnya ablak
+ */
 public class BarracksFrame extends JFrame {
     private City city;
     private List<JButton> buttons;
 
-
+    /**
+     * Konstruktor.
+     * Kikapcsol minden gombot, ha éppen kiképez valamilyen egységet
+     * @param city város
+     */
     public BarracksFrame(City city){
         this.city = city;
         buttons = new ArrayList<>();
@@ -79,21 +86,37 @@ public class BarracksFrame extends JFrame {
         this.setMinimumSize(new Dimension(800,600));
     }
 
+    /**
+     * Kikapcsolja a gombokat.
+     */
     private void disableButtons(){
         for (JButton b : buttons){
             b.setEnabled(false);
         }
     }
 
+    /**
+     * Belső osztály. Gomb listener.
+     * Lenyomáskor elindítja a megfelelő egység kiképzését
+     */
     private class TrainUnitListener implements ActionListener {
         City city;
         GroundUnitType groundUnitType;
 
+        /**
+         * Konstruktor
+         * @param city város
+         * @param gu szárazföldi egység típusa
+         */
         public TrainUnitListener(City city, GroundUnitType gu) {
             this.city = city;
             this.groundUnitType = gu;
         }
 
+        /**
+         * Lenyomáskor indít egység kiképzést
+         * @param e
+         */
         @Override
         public void actionPerformed(ActionEvent e) {
             Army army = new Army();

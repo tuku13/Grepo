@@ -16,6 +16,9 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
 
+/**
+ * Fő ablak, melyen a város és a különböző menük láthetók
+ */
 public class CityFrame extends JFrame {
     private Game game;
     private JPanel panel;
@@ -26,6 +29,10 @@ public class CityFrame extends JFrame {
     private Timer timer;
     private CityModel cityModel;
 
+    /**
+     * Konstruktor
+     * @param game játék
+     */
     public CityFrame(Game game){
         this.game = game;
         this.setTitle("Grepo");
@@ -82,8 +89,15 @@ public class CityFrame extends JFrame {
         this.add(header,BorderLayout.NORTH);
     }
 
+    /**
+     * Timer tick-elését kezeli és lépteti a játékot időben
+     */
     private class TickListener implements ActionListener{
 
+        /**
+         * Lépteti a játékot időben
+         * @param e
+         */
         @Override
         public void actionPerformed(ActionEvent e) {
             game.tick();
@@ -91,6 +105,9 @@ public class CityFrame extends JFrame {
         }
     }
 
+    /**
+     * Megnyitja az értesítések ablakot
+     */
     private class ClickNotificationButtonListener implements ActionListener{
 
         @Override
@@ -103,6 +120,9 @@ public class CityFrame extends JFrame {
         }
     }
 
+    /**
+     * Megnyitja az egységeket megjelenítő tabot
+     */
     private class ViewArmyListener implements ActionListener{
 
         @Override
@@ -115,6 +135,9 @@ public class CityFrame extends JFrame {
         }
     }
 
+    /**
+     * Kezeli a város váltást JComboBox itemChange hatására
+     */
     private class ChangeCityListener implements ItemListener {
 
         @Override
@@ -127,6 +150,9 @@ public class CityFrame extends JFrame {
         }
     }
 
+    /**
+     * Megjeleníti a sziget nézetet
+     */
     private class ClickIslandButtonListener implements ActionListener{
 
         @Override
@@ -143,6 +169,9 @@ public class CityFrame extends JFrame {
         }
     }
 
+    /**
+     * Megnyitja a kiválaszottt épülethez tartozó ablakot
+     */
     private class ClickOnBuildingEvent implements MouseListener {
 
         @Override
@@ -226,6 +255,9 @@ public class CityFrame extends JFrame {
         public void mouseExited(MouseEvent e) { }
     }
 
+    /**
+     * Hozzáadja az új elfoglalat várost a JComboBox-hoz
+     */
     private class RefreshComboBox implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
