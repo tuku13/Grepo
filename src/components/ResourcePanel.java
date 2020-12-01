@@ -1,4 +1,4 @@
-package guis;
+package components;
 
 import game.ResourceStack;
 import tasks.Tickable;
@@ -14,7 +14,7 @@ public class ResourcePanel extends JPanel implements Tickable {
     public ResourcePanel(ResourceStack resourceStack){
         this.resourceStack = resourceStack;
         flowLayout = new FlowLayout();
-        flowLayout.setHgap(60);
+        flowLayout.setHgap(40);
         flowLayout.setAlignment(FlowLayout.RIGHT);
         this.setLayout(flowLayout);
         this.setOpaque(false);

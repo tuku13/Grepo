@@ -1,5 +1,6 @@
 package guis;
 
+import components.UnitPanel;
 import game.City;
 
 import javax.swing.*;

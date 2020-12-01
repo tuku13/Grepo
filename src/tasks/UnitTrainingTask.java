@@ -2,7 +2,6 @@ package tasks;
 
 import game.City;
 import units.Army;
-import units.GroundUnit;
 
 import javax.swing.*;
 

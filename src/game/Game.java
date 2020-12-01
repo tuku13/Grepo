@@ -15,22 +15,33 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Game implements Tickable, Serializable{
-    private static final long serialVersionUID = 42357842569827483L;
     private List<Player> players;
     private List<Island> islands;
     private transient Player authenticatedPlayer;
-    //public transient TaskManager taskManager;
 
     public Game(){
         players = new ArrayList<>();
         islands = new ArrayList<>();
-        //taskManager = TaskManager.getInstance();
 
         if(Main.DEBUG){
             tesztAdatokFeltöltése();//todo törlése ha nem kell
         }
 
         save();
+    }
+
+    public List<City> getPlayerCities(Player player){
+        List<City> cities = new ArrayList<>();
+
+        for(Island island: islands){
+            for(City city : island.getCities().values()){
+                if(city.getPlayer() == player){
+                    cities.add(city);
+                }
+            }
+        }
+
+        return cities;
     }
 
     private void tesztAdatokFeltöltése(){

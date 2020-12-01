@@ -24,9 +24,10 @@ public class StartWarFrame extends JFrame {
     public StartWarFrame(City from, City to){
         this.from = from;
         this.to = to;
-        army = new Army();
-        groundUnitSpinner = new HashMap<>();
-        navalUnitSpinner = new HashMap<>();
+        this.army = new Army();
+        this.groundUnitSpinner = new HashMap<>();
+        this.navalUnitSpinner = new HashMap<>();
+
         init();
     }
 

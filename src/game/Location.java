@@ -3,7 +3,7 @@ package game;
 import java.io.Serializable;
 
 public class Location implements Serializable {
-    double x,y;
+    private double x,y;
 
     public Location(double x, double y) {
         this.x = x;

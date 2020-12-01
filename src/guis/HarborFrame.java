@@ -1,5 +1,6 @@
 package guis;
 
+import components.ResourcePanel;
 import enums.BuildingType;
 import enums.NavalUnitType;
 import game.City;
@@ -26,7 +27,7 @@ public class HarborFrame extends JFrame {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setTitle(BuildingType.HARBOR.getName() + " lvl " + city.getBuilding(BuildingType.HARBOR).getLevel());
         this.setResizable(true);
-        this.setLayout(new GridLayout(NavalUnitType.values().length, 1 , 50,0)); //todo hgap 50 volt
+        this.setLayout(new GridLayout(NavalUnitType.values().length, 1 , 50,0));
 
         for(NavalUnitType nu : NavalUnitType.values()){
             JPanel panel = new JPanel();

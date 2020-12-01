@@ -1,5 +1,7 @@
 package guis;
 
+import components.ImagePanel;
+import components.ResourcePanel;
 import enums.BuildingType;
 import game.City;
 import game.Game;
@@ -11,8 +13,10 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collection;
 
-public class CityGUI extends JFrame {
+public class CityFrame extends JFrame {
     private Game game;
     private JPanel panel;
     private ResourcePanel resourcePanel;
@@ -20,8 +24,9 @@ public class CityGUI extends JFrame {
     private JComboBox comboBox;
     private JFrame openedFrame = null;
     private Timer timer;
+    private CityModel cityModel;
 
-    public CityGUI(Game game) throws HeadlessException, IOException {
+    public CityFrame(Game game){
         this.game = game;
         this.setTitle("Grepo");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -32,11 +37,22 @@ public class CityGUI extends JFrame {
         timer.setRepeats(true);
         timer.start();
 
-        panel = new ImagePanel(ImageIO.read(new File("images/city.png")));
+        try {
+            panel = new ImagePanel(ImageIO.read(new File("images/city.png")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         panel.setSize(1024,768);
         panel.addMouseListener(new ClickOnBuildingEvent());
 
-        JPanel header = new ImagePanel(ImageIO.read(new File("images/header.png")));
+        JPanel header;
+        try {
+            header = new ImagePanel(ImageIO.read(new File("images/header.png")));
+        } catch (IOException e) {
+            e.printStackTrace();
+            header = new JPanel();
+        }
+
         FlowLayout flowLayout = new FlowLayout(FlowLayout.RIGHT);
         header.setLayout(flowLayout);
         JButton notificationButton = new JButton("Értesítések");
@@ -51,7 +67,8 @@ public class CityGUI extends JFrame {
         armyButton.addActionListener(new ViewArmyListener());
         header.add(armyButton);
 
-        this.comboBox = new JComboBox(new CityModel(game.getIslands(),game.getAuthenticatedPlayer()));
+        this.cityModel = new CityModel(game.getIslands(),game.getAuthenticatedPlayer());
+        this.comboBox = new JComboBox(cityModel);
         this.city = (City) comboBox.getSelectedItem();
         comboBox.addItemListener(new ChangeCityListener());
         header.add(comboBox,BorderLayout.CENTER);
@@ -212,7 +229,16 @@ public class CityGUI extends JFrame {
     private class RefreshComboBox implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            CityModel cityModel = (CityModel) comboBox.getModel();
+            Collection<ItemListener> listeners = Arrays.asList(comboBox.getItemListeners());
+            for ( ItemListener itemListener: listeners) {
+                comboBox.removeItemListener(itemListener);
+            }
+            comboBox.setModel(new CityModel(game.getIslands(),game.getAuthenticatedPlayer()));
+            comboBox.setSelectedItem(city);
+            for ( ItemListener itemListener: listeners) {
+                comboBox.addItemListener( itemListener);
+            }
+
         }
     }
 }

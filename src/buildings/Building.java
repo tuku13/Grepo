@@ -2,7 +2,6 @@ package buildings;
 
 import com.sun.istack.internal.NotNull;
 import enums.BuildingType;
-import exceptions.BuildingReachedMaxLevel;
 import game.City;
 import tasks.Task;
 import tasks.Tickable;
@@ -21,14 +20,10 @@ public class Building implements Serializable, Tickable {
         this.city = city;
     }
 
-    public final void upgrade() throws BuildingReachedMaxLevel{
-       /* if(level >= buildingType.getMaxLevel()){
-            throw new BuildingReachedMaxLevel();
-        }
-        else{
+    public final void upgrade(){
+        if(level < buildingType.getMaxLevel()){
             ++level;
-        }*/
-        ++level;
+        }
     }
 
     @Override
@@ -38,16 +33,16 @@ public class Building implements Serializable, Tickable {
         }
         switch (buildingType){
             case QUARRY:
-                city.getResources().add(0,(level * 20.0 * city.getIsland().getStoneMultiplier()) / 1800,0);
+                city.getResources().add(0,(level * 20.0 * city.getIsland().getStoneMultiplier()) / 180,0);
                 break;
             case SILVER_MINE:
-                city.getResources().add(0,0,(level * 20.0 * city.getIsland().getSilverMultiplier()) / 1800);
+                city.getResources().add(0,0,(level * 20.0 * city.getIsland().getSilverMultiplier()) / 100);
                 break;
             case TIMBER_CAMP:
-                city.getResources().add((level * 20.0 * city.getIsland().getWoodMultiplier()) / 1800,0,0);
+                city.getResources().add((level * 20.0 * city.getIsland().getWoodMultiplier()) / 100,0,0);
                 break;
             case TEMPLE:
-                city.getResources().add(0,0,0,(level * 25.0) / 1800);
+                city.getResources().add(0,0,0,(level * 25.0) / 180);
                 break;
         }
     }

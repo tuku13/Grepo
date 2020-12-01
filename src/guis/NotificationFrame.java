@@ -6,8 +6,6 @@ import tasks.TaskManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +32,7 @@ public class NotificationFrame extends JFrame {
             }
         }
 
-        this.setLayout(new GridLayout(tasks.size(), 1, 50, 0)); //todo hgap 50 volt
+        this.setLayout(new GridLayout(tasks.size(), 1, 50, 0));
 
         if(tasks.size() > 0){
             for(Task t : tasks){

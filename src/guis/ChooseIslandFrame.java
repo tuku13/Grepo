@@ -1,7 +1,6 @@
 package guis;
 
 import components.ImagePanel;
-import game.City;
 import game.Game;
 
 import javax.imageio.ImageIO;
@@ -12,28 +11,36 @@ import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 
-public class IslandFrame extends JFrame {
+public class ChooseIslandFrame extends JFrame {
     private Game game;
     private JPanel panel;
-    private City city;
     private JFrame openedFrame;
 
-    public IslandFrame(Game game,City city) throws HeadlessException, IOException {
+    public ChooseIslandFrame(Game game){
         this.game = game;
-        this.city = city;
-        this.setTitle("Grepo - Sziget nézet");
+        this.setTitle("Grepo - Válassz szigetet, majd várost!");
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setSize(1024,768);
         this.setResizable(false);
 
-        panel = new ImagePanel(ImageIO.read(new File("images/islands.png")));
+        try {
+            panel = new ImagePanel(ImageIO.read(new File("images/islands.png")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         panel.setSize(1024,768);
-        panel.addMouseListener(new ClickIslandEvent());
+        panel.addMouseListener(new ClickIslandEvent(this));
 
         this.add(panel,BorderLayout.CENTER);
+
     }
 
     private class ClickIslandEvent implements MouseListener{
+        private JFrame chooseIslandFrame;
+
+        private ClickIslandEvent(JFrame chooseIslandFrame) {
+            this.chooseIslandFrame = chooseIslandFrame;
+        }
 
         @Override
         public void mouseClicked(MouseEvent e) {
@@ -42,7 +49,7 @@ public class IslandFrame extends JFrame {
                 if(openedFrame != null){
                     openedFrame.dispose();
                 }
-                openedFrame = new IslandListFrame(game,game.getIslands().get(0),city);
+                openedFrame = new FoundCityFrame(game,game.getIslands().get(0),chooseIslandFrame);
                 openedFrame.setVisible(true);
             }
 
@@ -50,7 +57,7 @@ public class IslandFrame extends JFrame {
                 if(openedFrame != null){
                     openedFrame.dispose();
                 }
-                openedFrame = new IslandListFrame(game,game.getIslands().get(1),city);
+                openedFrame = new FoundCityFrame(game,game.getIslands().get(1),chooseIslandFrame);
                 openedFrame.setVisible(true);
             }
 
@@ -58,7 +65,7 @@ public class IslandFrame extends JFrame {
                 if(openedFrame != null){
                     openedFrame.dispose();
                 }
-                openedFrame = new IslandListFrame(game,game.getIslands().get(2),city);
+                openedFrame = new FoundCityFrame(game,game.getIslands().get(2),chooseIslandFrame);
                 openedFrame.setVisible(true);
             }
 

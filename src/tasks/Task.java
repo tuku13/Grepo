@@ -31,14 +31,6 @@ public abstract class Task implements Serializable {
 
     public abstract String toString();
 
-    public void start(){
-        active = true;
-    }
-
-    public void stop(){
-        active = false;
-    }
-
     public long getTime() {
         return time;
     }

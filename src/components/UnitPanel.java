@@ -1,4 +1,4 @@
-package guis;
+package components;
 
 import enums.GroundUnitType;
 import enums.NavalUnitType;

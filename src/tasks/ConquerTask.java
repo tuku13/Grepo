@@ -6,6 +6,7 @@ import units.Army;
 import javax.swing.*;
 
 public class ConquerTask extends WarTask {
+
     public ConquerTask(Long l, City city, Army army, City target) {
         super(l, city, army, target);
     }
@@ -15,7 +16,7 @@ public class ConquerTask extends WarTask {
         Army winner = army.battle(target.getArmy());
 
         if(winner == army){
-            target.conquer(city.getPlayer());
+            target.setPlayer(city.getPlayer());
             target.getArmy().add(army);
             JOptionPane.showMessageDialog(null,target.getName() + " nevű várost elfoglaltad!.","Információ",JOptionPane.INFORMATION_MESSAGE);
             return;

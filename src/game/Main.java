@@ -1,37 +1,14 @@
 package game;
 
-import guis.LoginScreen;
+import guis.LoginFrame;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 
 public class Main {
-    public static final boolean DEBUG = false;
+    public static final boolean DEBUG = true;
     public static void main(String[] args){
-
-        /*HashMap<Location,City> cityHashMap = new HashMap<>();
-        Island i = new Island("teszt",1,1,1,cityHashMap);
-        City c1 = new City(i,"város1");
-        cityHashMap.put(new Location( 0,100),c1);
-        City c2 = new City(i,"város2");
-        cityHashMap.put(new Location( 0,0),c2);
-        Army x = new Army();
-        x.add(new GroundUnit(GroundUnitType.ARCHER));
-        x.add(new GroundUnit(GroundUnitType.ARCHER));
-
-        Army y = new Army();
-        y.add(new GroundUnit(GroundUnitType.SWORDSMAN));
-        y.add(new GroundUnit(GroundUnitType.SWORDSMAN));
-
-        TaskManager.getInstance().add(new WarTask(1L,c1,x,c2));
-        TaskManager.getInstance().tick();
-        TaskManager.getInstance().tick();
-        TaskManager.getInstance().tick();
-        TaskManager.getInstance().tick();
-        TaskManager.getInstance().tick();
-        //Army győztes = x.battle(y);
-        //System.out.println("életben maradó katonák: " + győztes.getGroundArmy());*/
 
         Game game;
         if(DEBUG){
@@ -41,14 +18,8 @@ public class Main {
             game = loadGame();
         }
 
-        /*Island island = new Island("Szigetke",1,1.0,0.9,new HashMap<>());
-        City city = new City(island,"városke");
-        island.getCities().put(new Location(100,100),city);
-        ResourceInfoFrame gui = new ResourceInfoFrame(city,city.getBuilding(BuildingType.TIMBER_CAMP));
-        gui.setVisible(true);*/
-
-        LoginScreen loginScreen = new LoginScreen(game);
-        loginScreen.setVisible(true);
+        LoginFrame loginFrame = new LoginFrame(game);
+        loginFrame.setVisible(true);
 
     }
 

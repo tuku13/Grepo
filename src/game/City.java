@@ -2,8 +2,12 @@ package game;
 
 import buildings.Building;
 import enums.BuildingType;
+import enums.GroundUnitType;
+import enums.NavalUnitType;
 import tasks.Tickable;
 import units.Army;
+import units.GroundUnit;
+import units.NavalUnit;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,14 +20,20 @@ public final class City implements Tickable, Serializable {
     private List<Building> buildings;
     private Army army;
     private String name;
-    long defeatTime;
 
     public City(Island island,String name){
-        resources = new ResourceStack(1000,1000,1000,0); //TODO értelmesebb kezdő érték
+        resources = new ResourceStack(1500,1500,1500,0);
         this.island = island;
         this.name = name;
-        //todo talán nincs értelme: this.name = (name == null) ? (player.name + " városa") : name;
+
         buildings = new ArrayList<>();
+        initBuildings();
+
+        this.army = new Army();
+        initArmy();
+    }
+
+    private void initBuildings(){
         buildings.add(new Building(BuildingType.SENATE,1,this));
         buildings.add(new Building(BuildingType.QUARRY,1,this));
         buildings.add(new Building(BuildingType.TIMBER_CAMP,1,this));
@@ -31,9 +41,19 @@ public final class City implements Tickable, Serializable {
         buildings.add(new Building(BuildingType.BARRACKS,1,this));
         buildings.add(new Building(BuildingType.HARBOR,0,this));
         buildings.add(new Building(BuildingType.TEMPLE,0,this));
+    }
 
-        this.army = new Army();
-        defeatTime = 0;
+    private void initArmy(){
+        army.add(new GroundUnit(GroundUnitType.SWORDSMAN));
+        army.add(new GroundUnit(GroundUnitType.SWORDSMAN));
+        army.add(new GroundUnit(GroundUnitType.SWORDSMAN));
+        army.add(new GroundUnit(GroundUnitType.SLINGER));
+        army.add(new GroundUnit(GroundUnitType.SLINGER));
+        army.add(new GroundUnit(GroundUnitType.HOPLITE));
+
+        army.add(new NavalUnit(NavalUnitType.TRANSPORT_BOAT));
+        army.add(new NavalUnit(NavalUnitType.TRANSPORT_BOAT));
+        army.add(new NavalUnit(NavalUnitType.COLONY_SHIP));
     }
 
     public Building getBuilding(BuildingType buildingType){
@@ -45,22 +65,15 @@ public final class City implements Tickable, Serializable {
         return null;
     }
 
-    public void conquer(Player p){
-        //TODO talán kivétel, mert nem legyőzött várost nem lehet elfoglalni
-        if(defeatTime > 0){
-            return;
-        }
-        this.player = p;
-    }
-
     @Override
     public void tick() {
         for(Building b : buildings){
             b.tick();
         }
-        if(defeatTime > 0){
-            --defeatTime;
-        }
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Player getPlayer() {
@@ -73,10 +86,6 @@ public final class City implements Tickable, Serializable {
 
     public Island getIsland() {
         return island;
-    }
-
-    public long getDefeatTime() {
-        return defeatTime;
     }
 
     public Army getArmy() {
@@ -96,8 +105,8 @@ public final class City implements Tickable, Serializable {
         return name;
     }
 
-    //TODO nem kell csak tesztéshez
     public void setPlayer(Player player) {
         this.player = player;
     }
+
 }

@@ -3,8 +3,6 @@ package models;
 import game.City;
 import game.Island;
 import game.Player;
-import javafx.print.PageLayout;
-import org.hamcrest.core.Is;
 
 import javax.swing.*;
 import javax.swing.event.ListDataListener;
@@ -20,6 +18,7 @@ public class CityModel implements ComboBoxModel {
     public CityModel(List<Island> islands, Player player){
         this.islands = islands;
         this.player = player;
+
         initCities();
         if(cities != null && !cities.isEmpty()){
             selected = cities.get(0);
@@ -38,9 +37,6 @@ public class CityModel implements ComboBoxModel {
         }
     }
 
-    public void addCity(City city){
-        cities.add(city);
-    }
 
     @Override
     public void setSelectedItem(Object anItem) {

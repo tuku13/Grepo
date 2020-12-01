@@ -1,6 +1,7 @@
 package guis;
 
 import buildings.Building;
+import components.ResourcePanel;
 import enums.BuildingType;
 import exceptions.NotEnoughResource;
 import game.City;
@@ -23,10 +24,15 @@ public class SenateFrame extends JFrame {
     public SenateFrame(City city){
         this.city = city;
         this.buttons = new ArrayList<>();
+
+        init();
+    }
+
+    private void init(){
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setTitle(BuildingType.SENATE.getName() + " lvl " + city.getBuilding(BuildingType.SENATE).getLevel());
         this.setResizable(false);
-        this.setLayout(new GridLayout(city.getBuildings().size(), 1 , 75,0)); //todo hgap 50 volt
+        this.setLayout(new GridLayout(city.getBuildings().size(), 1 , 75,0));
 
         for(Building b : city.getBuildings()){
             JPanel panel = new JPanel();
@@ -43,8 +49,7 @@ public class SenateFrame extends JFrame {
             resourcePanel.setFontColor(new Color(0,0,0));
             panel.add(resourcePanel);
 
-            //todo talán alap font kellene
-            long buildingTime = Math.round(b.getBuildingType().getBuildingTime(b.getLevel()+1) * (( 101 - city.getBuilding(BuildingType.SENATE).getLevel()) / 100 ));
+            long buildingTime = Math.round(b.getBuildingType().getBuildingTime(b.getLevel()+1));
             String str = (Math.round(buildingTime / 3600)) + ":" +  (buildingTime / 60) + ":" + (buildingTime % 60);
             JLabel timeLabel = new JLabel(str);
             timeLabel.setIcon(new ImageIcon("images/time_icon.png"));
@@ -104,6 +109,7 @@ public class SenateFrame extends JFrame {
                 building.getCity().getResources().subtract(cost);
                 Task task = new BuildingTask(buildingTime,city,building);
                 TaskManager.getInstance().add(task);
+                city.getBuilding(BuildingType.SENATE).setTask(task);
             } catch (NotEnoughResource notEnoughResource) {
                 notEnoughResource.printStackTrace();
                 JOptionPane.showMessageDialog(null,"Nincs elég nyersanyagod!","Hiba",JOptionPane.ERROR_MESSAGE);

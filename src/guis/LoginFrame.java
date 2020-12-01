@@ -2,23 +2,24 @@ package guis;
 
 import game.Game;
 import game.Player;
-import org.omg.Messaging.SyncScopeHelper;
 
 import javax.swing.*;
-import javax.swing.text.Style;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
-public class LoginScreen extends JFrame {
+public class LoginFrame extends JFrame {
     private JTextField nameField;
     private JPasswordField passwordField;
     private JButton registerButton,loginButton;
     private Game game;
 
-    public LoginScreen(Game game) throws HeadlessException {
+    public LoginFrame(Game game) throws HeadlessException {
         this.game = game;
+        init();
+    }
+
+    private void init(){
         this.setTitle("Grepo - Bejelentkezés");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(400,300);
@@ -62,7 +63,7 @@ public class LoginScreen extends JFrame {
             String name = nameField.getText();
             String password = new String(passwordField.getPassword());
 
-            if (name == null || name.equals("") || password == null || password.equals("")){
+            if (name == null || name.equals("") || password.equals("")){
                 JOptionPane.showMessageDialog(null,"Hibás név vagy jelszó!","Hiba",JOptionPane.ERROR_MESSAGE);
                 return;
             }
@@ -74,7 +75,7 @@ public class LoginScreen extends JFrame {
             }
 
             game.registerPlayer(name,password);
-            System.out.println("Sikeres regisztráció");
+            JOptionPane.showMessageDialog(null,"Sikeres regisztráció, menj a belépés gombra!","Információ",JOptionPane.INFORMATION_MESSAGE);
 
         }
     }
@@ -86,30 +87,23 @@ public class LoginScreen extends JFrame {
             String name = nameField.getText();
             String password = new String(passwordField.getPassword());
 
-            if (name == null || name.equals("") || password == null || password.equals("")){
+            if (name == null || name.equals("") || password.equals("")){
                 JOptionPane.showMessageDialog(null,"Hiányzó adat","Hiba",JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
             if(game.authenticate(game.getPlayer(name),password)){
-                System.out.println("Sikeres belépés");
                 dispose();
-                //TODO új screen indítása
-                /*IslandFrame islandChooser = null;
-                try {
-                    islandChooser = new IslandFrame(game);
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
-                islandChooser.setVisible(true);*/
 
-                CityGUI gui = null;
-                try {
-                    gui = new CityGUI(game);
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
+                if(game.getPlayerCities(game.getAuthenticatedPlayer()).size() == 0){
+                    ChooseIslandFrame frame = new ChooseIslandFrame(game);
+                    dispose();
+                    frame.setVisible(true);
                 }
-                gui.setVisible(true);
+                else{
+                    CityFrame frame= new CityFrame(game);
+                    frame.setVisible(true);
+                }
 
             }
             else{

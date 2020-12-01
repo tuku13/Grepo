@@ -3,13 +3,9 @@ package enums;
 import game.ResourceStack;
 
 public enum NavalUnitType {
-    TRANSPORT_BOAT(0,1,26,8, 1, new ResourceStack(500,500,500), 300, "Szállítóbárka", "images/transport_boat.png"),
-    FAST_TRANSPORT_SHIP(1,0,10,15, 2, new ResourceStack(800,0,400), 600, "Gyors szállítóhajó", "images/fast_transport_ship.png"),
-    /*BIREME(24,160,0,15),
-    LIGHT_SHIP(200,60,0,13),
-    FIRE_SHIP(20,1,0,5),
-    TRIREME(250,250,0,15),*/
-    COLONY_SHIP(0,1,0,3, 3, new ResourceStack(10000,10000,10000), 1800, "Gyarmatosító hajó", "images/colony_ship.png");
+    TRANSPORT_BOAT(0,1,26,8, 1, new ResourceStack(50,50,50), 30, "Szállítóbárka", "images/transport_boat.png"),
+    FAST_TRANSPORT_SHIP(1,0,10,15, 2, new ResourceStack(80,0,40), 60, "Gyors szállítóhajó", "images/fast_transport_ship.png"),
+    COLONY_SHIP(0,1,0,3, 3, new ResourceStack(1000,1000,1000), 180, "Gyarmatosító hajó", "images/colony_ship.png");
 
     private final int attack, maxDefence, capacity, maxSpeed, requiredLevel;
     private final ResourceStack cost;

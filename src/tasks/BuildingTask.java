@@ -1,8 +1,6 @@
 package tasks;
 
 import buildings.Building;
-import enums.BuildingType;
-import exceptions.BuildingReachedMaxLevel;
 import game.City;
 
 import javax.swing.*;
@@ -23,11 +21,7 @@ public class BuildingTask extends Task {
 
     @Override
     public void execute() {
-        try {
-            building.upgrade();
-            JOptionPane.showMessageDialog(null,building.getBuildingType().getName() + " fejlesztése befejeződött.","Információ",JOptionPane.INFORMATION_MESSAGE);
-        } catch (BuildingReachedMaxLevel buildingReachedMaxLevel) {
-            buildingReachedMaxLevel.printStackTrace();
-        }
+        building.upgrade();
+        JOptionPane.showMessageDialog(null,building.getBuildingType().getName() + " fejlesztése befejeződött.","Információ",JOptionPane.INFORMATION_MESSAGE);
     }
 }

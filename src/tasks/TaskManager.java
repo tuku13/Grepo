@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-public class TaskManager implements Serializable{
+public final class TaskManager implements Serializable{
     private static TaskManager taskManager;
     private List<Task> tasks;
     private transient List<Task> futureTasks;
@@ -16,6 +16,7 @@ public class TaskManager implements Serializable{
     private TaskManager(){
         this.tasks = new ArrayList<>();
         this.futureTasks = new ArrayList<>();
+
         if(!Main.DEBUG){
             load();
         }
@@ -28,7 +29,7 @@ public class TaskManager implements Serializable{
         return taskManager;
     }
 
-    public final void load(){
+    public void load(){
         try{
             FileInputStream f = new FileInputStream("data" + File.separator +"tasks.ser");
             ObjectInputStream in = new ObjectInputStream(f);
@@ -38,7 +39,7 @@ public class TaskManager implements Serializable{
             exc.printStackTrace();
         }
     }
-    private final void save(){
+    private void save(){
         try{
             FileOutputStream f = new FileOutputStream("data" + File.separator +"tasks.ser");
             ObjectOutputStream out = new ObjectOutputStream(f);
@@ -67,9 +68,7 @@ public class TaskManager implements Serializable{
     }
 
     public void tick(){
-        for(Task t : futureTasks){
-            tasks.add(t);
-        }
+        tasks.addAll(futureTasks);
         futureTasks.clear();
         for(Task t : tasks){
             try{
@@ -90,7 +89,7 @@ public class TaskManager implements Serializable{
     private void removeExecutedTasks(){
         Iterator<Task> it = tasks.iterator();
         while (it.hasNext()){
-            if(it.next().executed == true){
+            if(it.next().executed){
                 it.remove();
             }
         }

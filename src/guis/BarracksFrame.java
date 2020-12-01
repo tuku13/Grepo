@@ -1,8 +1,8 @@
 package guis;
 
+import components.ResourcePanel;
 import enums.BuildingType;
 import enums.GroundUnitType;
-import enums.NavalUnitType;
 import game.City;
 import game.ResourceStack;
 import tasks.Task;
@@ -29,7 +29,7 @@ public class BarracksFrame extends JFrame {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setTitle(BuildingType.BARRACKS.getName() + " lvl " + city.getBuilding(BuildingType.BARRACKS).getLevel());
         this.setResizable(true);
-        this.setLayout(new GridLayout(GroundUnitType.values().length, 1 , 75,0)); //todo hgap 50 volt
+        this.setLayout(new GridLayout(GroundUnitType.values().length, 1 , 75,0));
 
         for(GroundUnitType gu : GroundUnitType.values()){
             JPanel panel = new JPanel();

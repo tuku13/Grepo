@@ -9,15 +9,15 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class IslandListFrame extends JFrame {
+public class FoundCityFrame extends JFrame {
     private Game game;
     private Island island;
-    private City city;
+    private JFrame chooseIslandFrame;
 
-    public IslandListFrame(Game game, Island island, City city){
+    public FoundCityFrame(Game game, Island island, JFrame frame){
         this.game = game;
         this.island = island;
-        this.city = city;
+        this.chooseIslandFrame = frame;
 
         this.setMinimumSize(new Dimension(400,island.getCities().size() * 100));
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -32,11 +32,11 @@ public class IslandListFrame extends JFrame {
 
             panel.add(new JLabel(c.getName()));
 
-            JButton button = new JButton("Saját város");
+            JButton button = new JButton("Foglalt");
             button.setEnabled(false);
-            if(c.getPlayer() != game.getAuthenticatedPlayer()){
-                button.setText("Támadás");
-                button.addActionListener(new AttackCityListener(city,c));
+            if(c.getPlayer() == null){
+                button.setText("Alapít");
+                button.addActionListener(new FoundCityListener(c));
                 button.setEnabled(true);
             }
             panel.add(button);
@@ -45,20 +45,26 @@ public class IslandListFrame extends JFrame {
         }
 
     }
-    private class AttackCityListener implements ActionListener{
+    private class FoundCityListener implements ActionListener{
+        private City chosenCity;
 
-        City from,to;
-
-        public AttackCityListener(City from, City to){
-            this.from = from;
-            this.to = to;
+        public FoundCityListener(City chosenCity) {
+            this.chosenCity = chosenCity;
         }
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            dispose();
-            StartWarFrame frame = new StartWarFrame(from,to);
-            frame.setVisible(true);
+            if(game.getPlayerCities(game.getAuthenticatedPlayer()).size() != 0){
+                dispose();
+                JOptionPane.showMessageDialog(null,"Van már városod, indítsd újra a játékot, hogy megjelenjen.","Hiba",JOptionPane.ERROR_MESSAGE);
+            }
+            else{
+                chooseIslandFrame.dispose();
+                dispose();
+                SetCityNameFrame frame = new SetCityNameFrame(game,chosenCity);
+                frame.setVisible(true);
+            }
+
         }
     }
 }
