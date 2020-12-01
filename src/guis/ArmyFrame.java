@@ -6,14 +6,24 @@ import game.City;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Egységeket megjelenítő ablak
+ */
 public class ArmyFrame extends JFrame {
     private City city;
 
+    /**
+     * Konstruktor
+     * @param city mely város egységei
+     */
     public ArmyFrame(City city) {
         this.city = city;
         init();
     }
 
+    /**
+     * Inicializálja az ablakot
+     */
     private void init(){
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setLayout(new GridBagLayout());

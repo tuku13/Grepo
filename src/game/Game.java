@@ -14,22 +14,35 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * Játék osztály, ez tartalmaz minden játékos és a pálya(sziget) adatot.
+ * Össze fogja az adatokat és lehetővé teszi a fájlba mentést és betöltést
+ */
 public class Game implements Tickable, Serializable{
     private List<Player> players;
     private List<Island> islands;
     private transient Player authenticatedPlayer;
 
+    /**
+     * Konstruktor
+     * Inicializálja a változókat
+     */
     public Game(){
         players = new ArrayList<>();
         islands = new ArrayList<>();
 
         if(Main.DEBUG){
-            tesztAdatokFeltöltése();//todo törlése ha nem kell
+            tesztAdatokFeltöltése();
         }
 
         save();
     }
 
+    /**
+     * Vissz adja a játékoshoz tartozó összes várost
+     * @param player játékos
+     * @return játékoshoz tartozó városok listája
+     */
     public List<City> getPlayerCities(Player player){
         List<City> cities = new ArrayList<>();
 
@@ -90,6 +103,11 @@ public class Game implements Tickable, Serializable{
         islands.add(silverIsland);
     }
 
+    /**
+     * Időzítő hatására meghívódó függvény.
+     * Végig megy Minden szigeten, majd a TaskManager-t is lépteti majd elmenti a változásokat.
+     * A játék fő irányító függvénye.
+     */
     @Override
     public void tick() {
         for (Island i : islands){
@@ -99,27 +117,9 @@ public class Game implements Tickable, Serializable{
         save();
     }
 
-    //régi serializálás
-    /*public void load(){
-        try{
-            FileInputStream f = new FileInputStream("data" + File.separator + "players");
-            ObjectInputStream in = new ObjectInputStream(f);
-            players = (List<Player>) in.readObject();
-            in.close();
-        } catch (Exception exc){
-            exc.printStackTrace();
-        }
-
-        try{
-            FileInputStream f = new FileInputStream("data" + File.separator +"islands");
-            ObjectInputStream in = new ObjectInputStream(f);
-            islands = (List<Island>) in.readObject();
-            in.close();
-        } catch (Exception exc){
-            exc.printStackTrace();
-        }
-    }*/
-
+    /**
+     * Fájlba elmenti önmagát, hogy kásőbb újra tölthető legyen
+     */
     public void save(){
         try{
             FileOutputStream f = new FileOutputStream("data" + File.separator +"game.ser");
@@ -131,10 +131,11 @@ public class Game implements Tickable, Serializable{
         }
     }
 
-    public void setAuthenticatedPlayer(Player authenticatedPlayer) {
-        this.authenticatedPlayer = authenticatedPlayer;
-    }
-
+    /**
+     * Megkeresi, hogy tartozik e játékos a megadott névhez.
+     * @param name játákos név
+     * @return névhez tartozó játékos, egyébként null
+     */
     public Player getPlayer(String name){
         for(Player p : players){
             if(p.getName().equals(name)){
@@ -144,17 +145,32 @@ public class Game implements Tickable, Serializable{
         return null;
     }
 
-    public void registerPlayer(@NotNull String name, @NotNull String pw){
+    /**
+     * Létrehozza a játékost megadott névvel és jelszóval
+     * @param name név
+     * @param pw jelszó
+     */
+    public void registerPlayer(String name,String pw){
         players.add(new Player(name,pw));
         save();
     }
 
+    /**
+     * Beállítja a játékost, így elindulhat a játék, megfelelő jelszó esetén.
+     * @param pl játékos
+     * @param pw jelszó
+     * @return igaz ha sikerült a belépés
+     */
     public boolean authenticate(Player pl,String pw){
         if(pl != null && pl.password.equals(pw)){
             authenticatedPlayer = pl;
             return true;
         }
         return false;
+    }
+
+    public void setAuthenticatedPlayer(Player authenticatedPlayer) {
+        this.authenticatedPlayer = authenticatedPlayer;
     }
 
     public List<Player> getPlayers() {

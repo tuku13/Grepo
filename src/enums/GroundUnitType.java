@@ -2,6 +2,9 @@ package enums;
 
 import game.ResourceStack;
 
+/**
+ * Szárazföldi egységeket és ahhoz tartozó konstansokat felsoroló enum
+ */
 public enum GroundUnitType {
     DIVINE_ENVOY(WeaponType.BLUNT,40,40,40,40,16,1,new ResourceStack(0,0,0,12),4,"Istenek küldötte","images/divine_envoy.png"),
     SWORDSMAN(WeaponType.BLUNT,5,14,8,30,8,2,new ResourceStack(95,0,85),3,"Kardforgató","images/swordsman.png"),
@@ -18,6 +21,20 @@ public enum GroundUnitType {
     private final long trainingTime;
     private final String name, imageName;
 
+    /**
+     * Konstruktor
+     * @param weaponType fegyvertípus
+     * @param attack támadás pont
+     * @param maxBluntDefence ütő fegyver elleni élet pont
+     * @param maxSharpDefence szúró fegyver elleni élet pont
+     * @param maxDistanceDefence távolsági fegyver elleni élet pont
+     * @param maxSpeed egység utazási sebessége
+     * @param requiredLevel kiképzéshez szükséges minimális barakk szint
+     * @param cost kiképzési költség
+     * @param trainingTime képzési idő
+     * @param name megjelenített név
+     * @param imageName képhez tartozó elérési út
+     */
     GroundUnitType(WeaponType weaponType, int attack, int maxBluntDefence, int maxSharpDefence, int maxDistanceDefence, int maxSpeed,int requiredLevel,ResourceStack cost,long trainingTime,String name,String imageName){
         this.weaponType = weaponType;
         this.attack = attack;

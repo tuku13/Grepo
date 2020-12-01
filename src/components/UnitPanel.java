@@ -7,11 +7,29 @@ import game.City;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Egységeket megjelenítő panel
+ */
 public class UnitPanel  extends JPanel {
     private City city;
+    private boolean isGround;
 
+    /**
+     * Konstruktor
+     * @param city mely város egységeit kell megjeleníteni
+     * @param isGround szárazföldiek kellenek
+     */
     public UnitPanel(City city, boolean isGround){
         this.city = city;
+        this.isGround = isGround;
+
+        init();
+    }
+
+    /**
+     * Felépíti a panelt a megfelelő egységekkel
+     */
+    private void init(){
         this.setBackground(new Color(254,225,157));
 
         if(isGround){
@@ -68,6 +86,5 @@ public class UnitPanel  extends JPanel {
                 this.add(navalUnitPanel);
             }
         }
-
     }
 }

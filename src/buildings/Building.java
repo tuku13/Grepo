@@ -1,6 +1,5 @@
 package buildings;
 
-import com.sun.istack.internal.NotNull;
 import enums.BuildingType;
 import game.City;
 import tasks.Task;
@@ -8,24 +7,41 @@ import tasks.Tickable;
 
 import java.io.Serializable;
 
+/**
+ * Ez a játékban az épületeket szimbolizáló osztály, mely a típúsától függően valamilyen tevékenységet végez
+ */
 public class Building implements Serializable, Tickable {
     protected final City city;
     protected final BuildingType buildingType;
     protected int level;
     protected Task task;
 
-    public Building(BuildingType buildingType,int level,@NotNull City city){
+    /**
+     * Az osztály konstruktora
+     * @param buildingType Az űpület típusa
+     * @param level Az épület szintje
+     * @param city Mely városban található az épület
+     */
+    public Building(BuildingType buildingType,int level,City city){
         this.buildingType = buildingType;
         this.level = level;
         this.city = city;
     }
 
+    /**
+     * Fejleszti az épületet egy szinttel, ha még nem érte el a típusától függű maximumot.
+     */
     public final void upgrade(){
         if(level < buildingType.getMaxLevel()){
             ++level;
         }
     }
 
+    /**
+     * A játék időzítője hívja meg, hogy valamilyen tevékenységet végezzen.
+     * Egy termelő épület szinttől függően egységnyi nyersanyagot termel a városnak.
+     * A többi épület egyszerre egy müveletet végezhet, az osztály task nevű attribútuma jelzi, hogy éppen melyiken dolgozik.
+     */
     @Override
     public void tick(){
         if(task != null && task.isExecuted()){

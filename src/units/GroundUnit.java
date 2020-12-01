@@ -5,10 +5,17 @@ import exceptions.HealDeadUnitException;
 
 import java.io.Serializable;
 
+/**
+ * Szárazföldi egységeket reprezentáló osztály
+ */
 public class GroundUnit extends Unit implements Ground {
     private GroundUnitType type;
     private int bluntDefence,sharpDefence,distanceDefence;
 
+    /**
+     * Konstruktor
+     * @param type egység típusa
+     */
     public GroundUnit(GroundUnitType type){
         this.type = type;
 
@@ -18,7 +25,10 @@ public class GroundUnit extends Unit implements Ground {
         this.distanceDefence = this.type.getMaxDistanceDefence();
     }
 
-    //megtámadja a paraméterként kapott ellenfelet, ha túléli visszatámad
+    /**
+     * {@link Ground#attack(GroundUnit)}
+     * @param other megtámadandó szárazföldi egység
+     */
     @Override
     public void attack(GroundUnit other) {
         damage(other);
@@ -27,7 +37,10 @@ public class GroundUnit extends Unit implements Ground {
         }
     }
 
-    //megsebzi a paraméterként kapott ellenfelet a fegyvertípúsa szerint
+    /**
+     * {@link Ground#damage(GroundUnit)}
+     * @param other megsebzendő szárazföldi egység
+     */
     @Override
     public void damage(GroundUnit other) {
         switch (type.getWeaponType()){
@@ -43,7 +56,10 @@ public class GroundUnit extends Unit implements Ground {
         }
     }
 
-    //minden védekező értéket beállít a maximumra
+    /**
+     * Feltölti az egység minden élet pontját a maximumra, ha él
+     * @throws HealDeadUnitException kivétel dobódik, ha az egység halott
+     */
     @Override
     public void heal() throws HealDeadUnitException {
         if(bluntDefence <= 0 || sharpDefence <= 0 || distanceDefence <= 0){
@@ -54,7 +70,11 @@ public class GroundUnit extends Unit implements Ground {
         this.distanceDefence = this.type.getMaxDistanceDefence();
     }
 
-    //ha minden védekező érték nagyobb, mint 0 akkor él a katona
+    /**
+     * Vissza adja, hogy él e még az egység
+     * Ha minden élet pontja legalább 1 akkor él
+     * @return él-e az egység
+     */
     @Override
     public boolean isAlive() {
         if(bluntDefence > 0 && sharpDefence > 0 && distanceDefence > 0){
@@ -95,14 +115,4 @@ public class GroundUnit extends Unit implements Ground {
         return type;
     }
 
-    @Override
-    public String toString() {
-        return "GroundUnit{" +
-                "type=" + type +
-                ", attack=" + type.getAttack() +
-                ", bluntDefence=" + bluntDefence +
-                ", sharpDefence=" + sharpDefence +
-                ", distanceDefence=" + distanceDefence +
-                '}';
-    }
 }

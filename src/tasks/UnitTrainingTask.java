@@ -5,14 +5,26 @@ import units.Army;
 
 import javax.swing.*;
 
+/**
+ * Egység kiképzését reprezentáló folyamat
+ */
 public class UnitTrainingTask extends Task{
     private Army army;
 
+    /**
+     * Konstruktor
+     * @param l képzés ideje
+     * @param city mely városba kerül a kiképzett egység
+     * @param army kiképzett egység
+     */
     public UnitTrainingTask(Long l, City city, Army army) {
         super(l,city);
         this.army = army;
     }
 
+    /**
+     * Lefutáskor hozzáadódnak a város meglévő seregéhez a kiképzett egységek
+     */
     @Override
     protected void execute() {
         city.getArmy().add(army);
@@ -24,6 +36,9 @@ public class UnitTrainingTask extends Task{
         }
     }
 
+    /**
+     * {@link Task#toString()}
+     */
     @Override
     public String toString() {
         if(army.hasAliveGroundUnit()){

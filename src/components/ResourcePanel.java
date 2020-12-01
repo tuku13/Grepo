@@ -6,13 +6,28 @@ import tasks.Tickable;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Nyersanyag kupacout grafikusan megjelenítő JPanel
+ */
 public class ResourcePanel extends JPanel implements Tickable {
     private ResourceStack resourceStack;
     private JLabel woodLabel,stoneLabel,silverLabel,favourLabel;
     private FlowLayout flowLayout;
 
+    /**
+     * Konstruktor
+     * @param resourceStack kirajzolandó nyersanyagok
+     */
     public ResourcePanel(ResourceStack resourceStack){
         this.resourceStack = resourceStack;
+
+        init();
+    }
+
+    /**
+     * Megjeleníti a megfelelő elemeket
+     */
+    private void init(){
         flowLayout = new FlowLayout();
         flowLayout.setHgap(40);
         flowLayout.setAlignment(FlowLayout.RIGHT);
@@ -49,10 +64,18 @@ public class ResourcePanel extends JPanel implements Tickable {
 
     }
 
+    /**
+     * Beállítja a Layout vízszintes távolságát
+     * @param i távolság
+     */
     public void setHorizontalGap(int i){
         flowLayout.setHgap(i);
     }
 
+    /**
+     * Beállítja a feliratok színét
+     * @param c szín
+     */
     public void setFontColor(Color c){
         woodLabel.setForeground(c);
         stoneLabel.setForeground(c);
@@ -60,15 +83,18 @@ public class ResourcePanel extends JPanel implements Tickable {
         favourLabel.setForeground(c);
     }
 
-    public void setResourceStack(ResourceStack resourceStack) {
-        this.resourceStack = resourceStack;
-    }
-
+    /**
+     * Frissíti a panelt, az új értékekkel
+     */
     @Override
     public void tick() {
         woodLabel.setText(String.format("%.2f",resourceStack.getWood()));
         stoneLabel.setText(String.format("%.2f",resourceStack.getStone()));
         silverLabel.setText(String.format("%.2f",resourceStack.getSilver()));
         favourLabel.setText(String.format("%.2f",resourceStack.getFavour()));
+    }
+
+    public void setResourceStack(ResourceStack resourceStack) {
+        this.resourceStack = resourceStack;
     }
 }

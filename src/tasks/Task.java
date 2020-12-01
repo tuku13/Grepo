@@ -4,11 +4,19 @@ import game.City;
 
 import java.io.Serializable;
 
+/**
+ * Egy absztrakt folyamatokat reprezentáló osztály
+ */
 public abstract class Task implements Serializable {
     protected long time;
     protected City city;
     protected boolean active,executed;
 
+    /**
+     * Konstruktor
+     * @param l folyamat ideje
+     * @param city folyamathoz tartozó város
+     */
     public Task(Long l,City city){
         time = l;
         this.city = city;
@@ -16,8 +24,16 @@ public abstract class Task implements Serializable {
         executed = false;
     }
 
+    /**
+     * Lejáró idő esetén lefutó függvény.
+     * Minden leszármazottnak kötelező megvalósítania.
+     */
     protected abstract void execute();
 
+    /**
+     * Időzítő hatására meghívódo függvény.
+     * Csökkenti minden a folyamat idejét, ha eléri a 0 meghívja az execute függvényt, majd leállítja önmagát
+     */
     public final void tick() {
         if(active && !executed){
             --time;
@@ -29,6 +45,11 @@ public abstract class Task implements Serializable {
         }
     }
 
+    /**
+     * Folyamat szöveges leírása.
+     * Minden leszármazott kötelezően megvalósítja.
+     * @returnFolyamat szöveges leírása
+     */
     public abstract String toString();
 
     public long getTime() {
