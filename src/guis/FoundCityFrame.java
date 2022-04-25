@@ -13,9 +13,9 @@ import java.awt.event.ActionListener;
  * Kiírja a szigethez tartozó városokat és üres helyen lehet alapítani
  */
 public class FoundCityFrame extends JFrame {
-    private Game game;
-    private Island island;
-    private JFrame chooseIslandFrame;
+    private final Game game;
+    private final Island island;
+    private final JFrame chooseIslandFrame;
 
     /**
      * Konstruktor
@@ -59,7 +59,7 @@ public class FoundCityFrame extends JFrame {
      * Várost alapít, majd megjeleníti a fő város nézet ablakot
      */
     private class FoundCityListener implements ActionListener{
-        private City chosenCity;
+        private final City chosenCity;
 
         public FoundCityListener(City chosenCity) {
             this.chosenCity = chosenCity;

@@ -20,14 +20,14 @@ import java.util.Collection;
  * Fő ablak, melyen a város és a különböző menük láthetók
  */
 public class CityFrame extends JFrame {
-    private Game game;
+    private final Game game;
     private JPanel panel;
-    private ResourcePanel resourcePanel;
+    private final ResourcePanel resourcePanel;
     private City city;
-    private JComboBox comboBox;
+    private final JComboBox comboBox;
     private JFrame openedFrame = null;
-    private Timer timer;
-    private CityModel cityModel;
+    private final Timer timer;
+    private final CityModel cityModel;
 
     /**
      * Konstruktor
@@ -160,11 +160,8 @@ public class CityFrame extends JFrame {
             if(openedFrame != null){
                 openedFrame.dispose();
             }
-            try {
-                openedFrame = new IslandFrame(game,city);
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
+            openedFrame = new IslandFrame(game,city);
+
             openedFrame.setVisible(true);
         }
     }
@@ -261,7 +258,7 @@ public class CityFrame extends JFrame {
     private class RefreshComboBox implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            Collection<ItemListener> listeners = Arrays.asList(comboBox.getItemListeners());
+            ItemListener[] listeners = comboBox.getItemListeners();
             for ( ItemListener itemListener: listeners) {
                 comboBox.removeItemListener(itemListener);
             }

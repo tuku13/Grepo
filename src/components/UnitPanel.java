@@ -11,8 +11,8 @@ import java.awt.*;
  * Egységeket megjelenítő panel
  */
 public class UnitPanel  extends JPanel {
-    private City city;
-    private boolean isGround;
+    private final City city;
+    private final boolean isGround;
 
     /**
      * Konstruktor

@@ -11,9 +11,9 @@ import java.awt.*;
  * Táblázatba kiírja az szintenkénti termelését
  */
 public class ResourceInfoFrame extends JFrame {
-    private City city;
-    private Building building;
-    private ResourceModel data;
+    private final City city;
+    private final Building building;
+    private final ResourceModel data;
 
     /**
      * Konstruktor

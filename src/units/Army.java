@@ -13,8 +13,8 @@ import java.util.List;
  * Hadsereget reprezentáló osztály
  */
 public class Army implements Serializable {
-    private List<GroundUnit> groundArmy;
-    private List<NavalUnit> navalArmy;
+    private final List<GroundUnit> groundArmy;
+    private final List<NavalUnit> navalArmy;
 
     /**
      * Konstruktor

@@ -9,7 +9,7 @@ import java.io.Serializable;
  * Szárazföldi egységeket reprezentáló osztály
  */
 public class GroundUnit extends Unit implements Ground {
-    private GroundUnitType type;
+    private final GroundUnitType type;
     private int bluntDefence,sharpDefence,distanceDefence;
 
     /**
@@ -77,10 +77,7 @@ public class GroundUnit extends Unit implements Ground {
      */
     @Override
     public boolean isAlive() {
-        if(bluntDefence > 0 && sharpDefence > 0 && distanceDefence > 0){
-            return true;
-        }
-        return false;
+        return bluntDefence > 0 && sharpDefence > 0 && distanceDefence > 0;
     }
 
     public int getMaxSpeed() {

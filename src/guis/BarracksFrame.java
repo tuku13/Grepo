@@ -6,7 +6,6 @@ import enums.GroundUnitType;
 import game.City;
 import game.ResourceStack;
 import tasks.Task;
-import tasks.TaskManager;
 import tasks.UnitTrainingTask;
 import units.Army;
 import units.GroundUnit;
@@ -22,8 +21,8 @@ import java.util.List;
  * Egységek képzéséhez szükséges Kaszárnya ablak
  */
 public class BarracksFrame extends JFrame {
-    private City city;
-    private List<JButton> buttons;
+    private final City city;
+    private final List<JButton> buttons;
 
     /**
      * Konstruktor.
@@ -122,7 +121,7 @@ public class BarracksFrame extends JFrame {
             Army army = new Army();
             army.add(new GroundUnit(groundUnitType));
             Task t = new UnitTrainingTask(groundUnitType.getTrainingTime(),city,army);
-            TaskManager.getInstance().add(t);
+            city.addTask(t);
             city.getBuilding(BuildingType.BARRACKS).setTask(t);
             dispose();
         }

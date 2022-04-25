@@ -11,9 +11,11 @@ import java.util.Map;
  * Összegyűjti koordináták szerint a városokat
  */
 public class Island implements Tickable, Serializable {
-    private String name;
-    private double stoneMultiplier,silverMultiplier,woodMultiplier;
-    private HashMap<Location,City> cities;
+    private final String name;
+    private final double stoneMultiplier;
+    private final double silverMultiplier;
+    private final double woodMultiplier;
+    private final HashMap<Location,City> cities;
 
     /**
      * Konstruktor

@@ -9,7 +9,7 @@ import javax.swing.*;
  * Építési folyamatot reprezentáló osztály
  */
 public class BuildingTask extends Task {
-    private Building building;
+    private final Building building;
 
     /**
      * Konstruktor

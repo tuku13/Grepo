@@ -15,7 +15,7 @@ import java.io.IOException;
  * Város alapitáshoz sziget megjelenítő Frame
  */
 public class ChooseIslandFrame extends JFrame {
-    private Game game;
+    private final Game game;
     private JPanel panel;
     private JFrame openedFrame;
 
@@ -46,7 +46,7 @@ public class ChooseIslandFrame extends JFrame {
      * Egér lenyomás-kor megnyitja a megfelelő szigetet
      */
     private class ClickIslandEvent implements MouseListener{
-        private JFrame chooseIslandFrame;
+        private final JFrame chooseIslandFrame;
 
         private ClickIslandEvent(JFrame chooseIslandFrame) {
             this.chooseIslandFrame = chooseIslandFrame;

@@ -9,7 +9,7 @@ import javax.swing.*;
  * Egységek utazását reprezentáló folyamat
  */
 public class TravellingTask extends Task{
-    private Army army;
+    private final Army army;
 
     /**
      * Konstruktor

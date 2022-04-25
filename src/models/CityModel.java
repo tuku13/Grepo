@@ -14,8 +14,8 @@ import java.util.List;
  */
 public class CityModel implements ComboBoxModel {
     private City selected = null;
-    private List<Island> islands;
-    private Player player;
+    private final List<Island> islands;
+    private final Player player;
     private List<City> cities;
 
     public CityModel(List<Island> islands, Player player){

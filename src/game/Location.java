@@ -6,7 +6,8 @@ import java.io.Serializable;
  * 2D koordinátákat reprezentáló osztály
  */
 public class Location implements Serializable {
-    private double x,y;
+    private final double x;
+    private final double y;
 
     /**
      * Konstruktor

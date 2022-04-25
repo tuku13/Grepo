@@ -2,19 +2,17 @@ package guis;
 
 import game.City;
 import tasks.Task;
-import tasks.TaskManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 
 /**
  * Városhoz tartozó folyamatokat megjelenítő ablak
  */
 public class NotificationFrame extends JFrame {
-    private City city;
-    private List<Task> tasks;
+    private final City city;
+    private HashSet<Task> tasks;
     private JPanel panel;
 
     /**
@@ -34,13 +32,8 @@ public class NotificationFrame extends JFrame {
      * Kirajzolja egymás alá az éppen futó folyamatokat
      */
     private void init(){
-        tasks = new ArrayList<>();
-
-        for(Task t : TaskManager.getInstance().getTasks()){
-            if(t.getCity() == city){
-                this.tasks.add(t);
-            }
-        }
+        //todo talán lehetne city.getTasks() is
+        tasks = city.getTasks();
 
         this.setLayout(new GridLayout(tasks.size(), 1, 50, 0));
 

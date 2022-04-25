@@ -15,7 +15,7 @@ public class LoginFrame extends JFrame {
     private JTextField nameField;
     private JPasswordField passwordField;
     private JButton registerButton,loginButton;
-    private Game game;
+    private final Game game;
 
     /**
      * Konstruktor

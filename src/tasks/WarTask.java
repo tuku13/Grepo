@@ -38,7 +38,7 @@ public class WarTask extends Task{
             long time = Math.round(distance / speed);
             JOptionPane.showMessageDialog(null,"Legyőted " + city.getName() + "nevű várost.","Információ",JOptionPane.INFORMATION_MESSAGE);
 
-            TaskManager.getInstance().addFutureTask(new TravellingTask(time,city,army));
+            city.addTask(new TravellingTask(time,city,army));
             return;
         }
         JOptionPane.showMessageDialog(null,city.getName() + " elleni támadás nem sikerült.","Információ",JOptionPane.ERROR_MESSAGE);

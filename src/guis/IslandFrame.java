@@ -16,9 +16,9 @@ import java.io.IOException;
  * Sziget nézet, szigetre kattintva meg lehet támadni a megjelenő városokat
  */
 public class IslandFrame extends JFrame {
-    private Game game;
+    private final Game game;
     private JPanel panel;
-    private City city;
+    private final City city;
     private JFrame openedFrame;
 
     /**

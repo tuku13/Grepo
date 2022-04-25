@@ -10,7 +10,7 @@ import java.awt.*;
  * Egységeket megjelenítő ablak
  */
 public class ArmyFrame extends JFrame {
-    private City city;
+    private final City city;
 
     /**
      * Konstruktor

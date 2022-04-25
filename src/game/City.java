@@ -4,6 +4,7 @@ import buildings.Building;
 import enums.BuildingType;
 import enums.GroundUnitType;
 import enums.NavalUnitType;
+import tasks.Task;
 import tasks.Tickable;
 import units.Army;
 import units.GroundUnit;
@@ -11,6 +12,8 @@ import units.NavalUnit;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -18,11 +21,13 @@ import java.util.List;
  */
 public final class City implements Tickable, Serializable {
     private Player player;
-    private ResourceStack resources;
-    private Island island;
-    private List<Building> buildings;
-    private Army army;
+    private final ResourceStack resources;
+    private final Island island;
+    private final List<Building> buildings;
+    private final Army army;
     private String name;
+    private final HashSet<Task> tasks;
+    private transient HashSet<Task> futureTasks;
 
     /**
      * Konstruktor
@@ -33,6 +38,9 @@ public final class City implements Tickable, Serializable {
         resources = new ResourceStack(1500,1500,1500,0);
         this.island = island;
         this.name = name;
+
+        this.tasks = new HashSet<>();
+        this.futureTasks = new HashSet<>();
 
         buildings = new ArrayList<>();
         initBuildings();
@@ -85,14 +93,42 @@ public final class City implements Tickable, Serializable {
         return null;
     }
 
+    private void removeExecutedTasks(){
+        Iterator<Task> it = tasks.iterator();
+        while (it.hasNext()){
+            if(it.next().isExecuted()){
+                it.remove();
+            }
+        }
+    }
+
     /**
      * Időzítő hívására végig megy minden épületen melyek elvégzik a feladatokat
      */
     @Override
     public void tick() {
+        if(futureTasks == null){
+            futureTasks = new HashSet<>();
+        }
+
+        tasks.addAll(futureTasks);
+        futureTasks.clear();
+        for(Task t : tasks){
+            try{
+                t.tick();
+            }
+            catch (Exception exc){
+                t.setExecuted(true);
+            }
+        }
+        removeExecutedTasks();
         for(Building b : buildings){
             b.tick();
         }
+    }
+
+    public void addTask(Task t){
+        futureTasks.add(t);
     }
 
     /**
@@ -107,6 +143,10 @@ public final class City implements Tickable, Serializable {
      */
     public Player getPlayer() {
         return player;
+    }
+
+    public HashSet<Task> getTasks() {
+        return tasks;
     }
 
     public ResourceStack getResources() {

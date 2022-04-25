@@ -4,7 +4,6 @@ import enums.GroundUnitType;
 import enums.NavalUnitType;
 import game.City;
 import tasks.ConquerTask;
-import tasks.TaskManager;
 import tasks.WarTask;
 import units.Army;
 
@@ -19,8 +18,9 @@ import java.util.Map;
  * Hadjáart indító ablak
  */
 public class StartWarFrame extends JFrame {
-    private City from,to;
-    private Army army;
+    private final City from;
+    private final City to;
+    private final Army army;
     private HashMap<GroundUnitType,JSpinner> groundUnitSpinner;
     private HashMap<NavalUnitType,JSpinner> navalUnitSpinner;
 
@@ -195,11 +195,11 @@ public class StartWarFrame extends JFrame {
             }
 
             if(army.isColonizingArmy()){
-                TaskManager.getInstance().add(new ConquerTask(time,from,army,to));
+                from.addTask(new ConquerTask(time,from,army,to));
                 JOptionPane.showMessageDialog(null,"Foglalási kísérlet elindítva " + to.getName() + " város felé.","Információ",JOptionPane.INFORMATION_MESSAGE);
             }
             else{
-                TaskManager.getInstance().add(new WarTask(time,from,army,to));
+                from.addTask(new WarTask(time,from,army,to));
                 JOptionPane.showMessageDialog(null,"Támadás elindítva " + to.getName() + " város felé.","Információ",JOptionPane.INFORMATION_MESSAGE);
             }
             dispose();

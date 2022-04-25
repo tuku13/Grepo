@@ -9,7 +9,7 @@ import javax.swing.*;
  * Egység kiképzését reprezentáló folyamat
  */
 public class UnitTrainingTask extends Task{
-    private Army army;
+    private final Army army;
 
     /**
      * Konstruktor

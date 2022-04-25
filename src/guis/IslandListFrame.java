@@ -13,9 +13,9 @@ import java.awt.event.ActionListener;
  * Kiírja a szigethez tartozó városokat
  */
 public class IslandListFrame extends JFrame {
-    private Game game;
-    private Island island;
-    private City city;
+    private final Game game;
+    private final Island island;
+    private final City city;
 
     public IslandListFrame(Game game, Island island, City city){
         this.game = game;

@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class ResourceModel extends AbstractTableModel {
 
-    private List<Double> resourcePerHour = new ArrayList<>();
+    private final List<Double> resourcePerHour = new ArrayList<>();
 
     @Override
     public int getRowCount() {

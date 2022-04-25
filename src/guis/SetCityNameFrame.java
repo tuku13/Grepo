@@ -12,8 +12,8 @@ import java.awt.event.ActionListener;
  * Város alapításakor megjelenő, város név beállító ablak
  */
 public class SetCityNameFrame extends JFrame {
-    private Game game;
-    private City city;
+    private final Game game;
+    private final City city;
     private JTextField cityNameTextField;
 
     /**

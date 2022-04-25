@@ -7,7 +7,7 @@ import java.awt.*;
  * Kép háttérrel rendelkező JPanel
  */
 public class ImagePanel extends JPanel {
-    private Image img;
+    private final Image img;
 
     /**
      * Konstruktor

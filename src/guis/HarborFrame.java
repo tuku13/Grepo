@@ -5,7 +5,6 @@ import enums.BuildingType;
 import enums.NavalUnitType;
 import game.City;
 import game.ResourceStack;
-import tasks.TaskManager;
 import tasks.UnitTrainingTask;
 import units.Army;
 import units.NavalUnit;
@@ -21,8 +20,8 @@ import java.util.List;
  * Egységek képzéséhez szükséges Kikötő ablak
  */
 public class HarborFrame extends JFrame {
-    private City city;
-    private List<JButton> buttons;
+    private final City city;
+    private final List<JButton> buttons;
 
     /**
      * Konstruktor
@@ -110,7 +109,7 @@ public class HarborFrame extends JFrame {
         public void actionPerformed(ActionEvent e) {
             Army army = new Army();
             army.add(new NavalUnit(navalUnitType));
-            TaskManager.getInstance().add(new UnitTrainingTask(navalUnitType.getTrainingTime(),city,army));
+            city.addTask(new UnitTrainingTask(navalUnitType.getTrainingTime(),city,army));
             dispose();
         }
     }

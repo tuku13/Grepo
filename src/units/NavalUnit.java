@@ -7,7 +7,7 @@ import exceptions.HealDeadUnitException;
  * Vízi egységeket reprezentáló osztály
  */
 public class NavalUnit extends Unit implements Naval{
-    private NavalUnitType type;
+    private final NavalUnitType type;
     private int defence;
 
     /**

@@ -77,10 +77,7 @@ public class ResourceStack implements Serializable {
      * @return
      */
     public boolean hasEnough(ResourceStack r){
-        if(this.wood - r.wood < 0 || this.stone - r.stone < 0 || this.silver - r.silver< 0 || this.favour - r.favour < 0){
-            return false;
-        }
-        return true;
+        return !(this.wood - r.wood < 0) && !(this.stone - r.stone < 0) && !(this.silver - r.silver < 0) && !(this.favour - r.favour < 0);
     }
 
     /**

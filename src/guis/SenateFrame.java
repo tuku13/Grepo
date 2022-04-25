@@ -8,7 +8,6 @@ import game.City;
 import game.ResourceStack;
 import tasks.BuildingTask;
 import tasks.Task;
-import tasks.TaskManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,8 +20,8 @@ import java.util.List;
  * Épületek fejlesztését megjelenítő ablak
  */
 public class SenateFrame extends JFrame {
-    private City city;
-    private List<JButton> buttons;
+    private final City city;
+    private final List<JButton> buttons;
 
     public SenateFrame(City city){
         this.city = city;
@@ -105,9 +104,9 @@ public class SenateFrame extends JFrame {
      * Gombra kattintva elindítja a kiválasztott éplüet fejlesztését
      */
     private class upgradeBuildingListener implements ActionListener {
-        private Building building;
-        private ResourceStack cost;
-        private long buildingTime;
+        private final Building building;
+        private final ResourceStack cost;
+        private final long buildingTime;
 
         public upgradeBuildingListener(Building b, ResourceStack c,long buildingTime){
             this.building = b;
@@ -120,10 +119,9 @@ public class SenateFrame extends JFrame {
             try {
                 building.getCity().getResources().subtract(cost);
                 Task task = new BuildingTask(buildingTime,city,building);
-                TaskManager.getInstance().add(task);
+                city.addTask(task);
                 city.getBuilding(BuildingType.SENATE).setTask(task);
             } catch (NotEnoughResource notEnoughResource) {
-                notEnoughResource.printStackTrace();
                 JOptionPane.showMessageDialog(null,"Nincs elég nyersanyagod!","Hiba",JOptionPane.ERROR_MESSAGE);
             }
             dispose();

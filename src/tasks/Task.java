@@ -10,14 +10,15 @@ import java.io.Serializable;
 public abstract class Task implements Serializable {
     protected long time;
     protected City city;
-    protected boolean active,executed;
+    protected boolean active;
+    protected boolean executed;
 
     /**
      * Konstruktor
      * @param l folyamat ideje
      * @param city folyamathoz tartozó város
      */
-    public Task(Long l,City city){
+    protected Task(Long l,City city){
         time = l;
         this.city = city;
         active = true;
@@ -48,7 +49,7 @@ public abstract class Task implements Serializable {
     /**
      * Folyamat szöveges leírása.
      * Minden leszármazott kötelezően megvalósítja.
-     * @returnFolyamat szöveges leírása
+     * @return Folyamat szöveges leírása
      */
     public abstract String toString();
 
